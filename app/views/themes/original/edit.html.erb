@@ -1,0 +1,53 @@
+<h1> Редактирование <%= @theme.theme_name %> </h1>
+<%= error_messages_for 'theme' -%>
+
+<% form_for :theme, @theme, :url => {:action => 'update', :id => @theme},:html => { :multipart => true}  do |f| %>
+
+<p><label for="theme_name">Название работы</label><br/>
+<%= f.text_field  :theme_name, {:size => 100}  %></p>
+
+<p><label for="theme_fio">Автор</label><br/>
+<%= f.text_field  :fio, {:size => 50} %></p>
+
+<p><label for="theme_year_name">Год</label><br/>
+<%= f.text_field :year_name %></p>
+
+
+<p><label for="organization_organization_name">Организация</label><br />
+<%= collection_select(:theme, :organization_id, @organizations, :id, :organization_name)%></p>
+
+<p><label for="code_code_name">Шифр</label><br/>
+<%= collection_select(:profession, :code_id, @codes, :id, :code_name)%>
+
+<p><label for="profession_profession_name">Специальность</label><br/>
+<%= collection_select(:theme, :profession_id, @professions, :id, :profession_name)%></p>
+
+
+<p><label for="grade_grade_name">Степень</label><br/>
+<%= collection_select(:profession, :grade_id, @grades, :id, :grade_name)%></p>
+
+
+<p><label for="theme_text_abstract"><b>Текст автореферата</b></label><br/>
+<%= f.text_area :text_abstract, {:size =>"80x30"} %></p>
+
+<p><label for="theme_text_dissertation">Текст диссертации</label><br/>
+<%= f.text_area  :text_dissertation, {:size =>"80x30"} %></p>
+
+
+<%# fields_for :theme,@theme, :html => { :multipart => true} do |form| %>
+ <p><label for="avtoref_file">Файлы автореферата</label><br />
+
+	Doc <%= f.file_field :avtoref_doc %> <% if @theme.avtoref_doc.exists? %>Текущий файл: <%= @theme.avtoref_doc.original_filename %>
+	<% end %><br /> <br />
+	Pdf  <%= f.file_field :avtoref_pdf %><% if @theme.avtoref_pdf.exists? %>Текущий файл: <%= @theme.avtoref_pdf.original_filename %>
+	<% end %><br />
+ <p><label for="disser_file">Файлы диссертации</label><br />
+	Doc <%= f.file_field :disser_doc %><% if @theme.disser_doc.exists? %>Текущий файл: <%= @theme.disser_doc.original_filename %>
+	<% end %><br /> <br />
+	Pdf  <%= f.file_field :disser_pdf %><% if @theme.disser_pdf.exists? %>Текущий файл: <%= @theme.disser_pdf.original_filename %>
+	<% end %><br /> <br />
+
+<%= submit_tag "Сохранить" %>
+<% end %>
+<%# end %>
+<%= link_to 'Назад', {:action => 'list'} %>

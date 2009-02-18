@@ -1,0 +1,8 @@
+<h2>Организации</h2>
+
+Добавить организацию :
+<%= form_tag :action => 'create'%>
+<%= text_field  :organization, :organization_name %>
+<%= submit_tag "Добавить" %>
+
+<%= link_to 'К списку', :action => :list %>

@@ -1,0 +1,40 @@
+<% @user.password = @user.password_confirmation = nil %>
+<%= link_to_back "Назад" %>
+<%= title "Регистрация", :h2 %>
+<% form_for @user do |f| %>
+	<%= f.error_messages %>
+	<fieldset>
+		<legend>Ваши данные</legend>
+		<ol>
+			<li>
+				<%= f.label :login, 'Имя пользователя' %>
+				<%= f.text_field :login %>
+			</li>
+			<li>
+				<%= f.label :email %>
+				<%= f.text_field :email %>
+			</li>
+			<li>
+				<%= f.label :password, 'Пароль' %>
+				<%= f.password_field :password %>
+			</li>
+			<li>
+				<%= f.label :password_confirmation, 'Еще раз пароль' %>
+				<%= f.password_field :password_confirmation %>
+			</li>
+
+			<p> <li>
+<% for role in Role.find(:all) %>
+	<div>
+	<%= radio_button_tag "user[role_ids][]", role.id, @user.roles.include?(role)%>
+	<%= role.name %>
+	</div>
+<% end %>
+</li></p>
+		</ol>
+	</fieldset>
+
+	<div class="buttons">
+		<%= submit_tag 'Зарегистрироваться' %>
+	</div>
+<% end %>

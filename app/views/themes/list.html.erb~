@@ -1,0 +1,109 @@
+<% if  admin_do?(current_user) %>
+<ul id="references">
+	<li><%= link_to "Организации", :controller => :organizations, :action => :list %></li>
+	<li><%= link_to "Степени", :controller => :grades, :action => :list %></li>
+	<li><%= link_to "Области", :controller => :areas, :action => :list %></li>
+	<li><%= link_to "Подобласти", :controller => :subareas, :action => :list %></li>
+	<li><%= link_to "Специальности", :controller => :professions, :action => :list %></li>
+</ul> <br />
+<p><%= link_to "Добавить", {:action => 'new' }%></p>
+<% end %>
+
+  <h3>Поиск</h3>
+
+ <% form_tag 'list', :method => :get do -%>
+ 	<div id="search">
+		<%= text_field_tag(:q,params[:q], :size => 30) %>
+ 		<%= submit_tag "Искать" %>
+ 	</div>
+ <% end -%>
+
+<% if @themes.blank? %>
+  <p>Записей не наидено</p>
+<% else %>
+
+<div id="search_table">
+<%# if @themes and not @themes.empty? %>
+
+<table width=95% border=1 cellpadding=4 cellspacing=0 align=left >
+
+<caption>Список авторефератов и диссертации</caption>
+	 <tr>
+	 <th rowspan=2>№</th><th rowspan=2>Автор</th><th rowspan=2>Тема</th><th rowspan=2>Организация</th><th rowspan=2>Год</th><th rowspan=2>Шифр</th><th rowspan=2>Специальность</th><th rowspan=2>Степень</th><th rowspan=2>Текст автореферата</th>
+	 <% if  admin_do?(current_user) %>
+	 <th rowspan=2>Текст диссертации</th><th colspan=2>Скачать текст автореферата</th><th colspan=2>Скачать текст диссертации</th><th rowspan=2>Действия</th>
+	 <% end %>
+	 </tr>
+
+	 <tr>
+	 <% if  admin_do?(current_user) %>
+	 <th>.Doc</th><th>Pdf</th><th>.Doc</th><th>Pdf</th>
+	 <% end %>
+	 </tr>
+
+<% @themes.each do |t| -%>
+<tr class="<%= cycle("even","odd") %>">
+	<td valign=top><%= t.id %> </td>
+	<td valign=top><%= t.fio %> </td>
+	<td valign=top><%= link_to t.theme_name, :controller => :themes, :action => :show, :id => t.id %></td>
+	<td valign=top><%= t.organization.organization_name %></td>
+	<td valign=top><%= t.year_name %></td>
+	<td valign=top><%= t.profession.code_name %></td>
+	<td valign=top><%= t.profession.profession_name %> <% t.profession.areas.each do |ar|%> <% ar.subareas.each do |subar| %>
+			(<%= subar.subarea_name %>)
+				<% end %>
+				<% end %></td>
+
+
+	<td valign=top><%= t.profession.grade.grade_name %></td>
+	<% if t.avtoref_swf.exists? %>
+	<td valign=top><%= link_to "Просмотр", {:controller => :themes, :action => :show_avtoref_swf, :id => t.id}, :target => "_blank" %></td>
+	<% end %>
+
+	<% if  admin_do?(current_user) %>
+	<% if t.disser_swf.exists? %>
+	<td valign=top><%= link_to "Просмотр", {:controller => :themes, :action => :show_disser_swf, :id => t.id}, :target => "_blank" %></td>
+	<% end %>
+
+	<% if t.avtoref_doc.exists? %>
+	<td valign=top><%= link_to image_tag("doc.jpeg", :border => 0) , :controller => :themes, :action => :download_avtoref_doc, :id => t.id %></td>
+	<% else %>
+	<td valign=top><%= image_tag("doc_no.jpeg", :border => 0) %></td>
+	<% end %>
+
+	<% if t.avtoref_pdf.exists? %>
+	<td valign=top><%= link_to image_tag("pdf.jpeg", :border => 0) , :controller => :themes, :action => :download_avtoref_pdf, :id => t.id %></td>
+	<% else %>
+	<td valign=top><%= image_tag("pdf_no.jpeg", :border => 0)  %></td>
+	<% end %>
+
+	<% if t.disser_doc.exists? %>
+	<td valign=top><%= link_to image_tag("doc.jpeg", :border => 0) , :controller => :themes, :action => :download_disser_doc, :id => t.id %></td>
+	<% else %>
+	<td valign=top><%= image_tag("doc_no.jpeg", :border => 0)  %></td>
+	<% end %>
+
+	<% if t.disser_pdf.exists? %>
+	<td valign=top><%= link_to image_tag("pdf.jpeg", :border => 0) , :controller => :themes, :action => :download_disser_pdf, :id => t.id %></td>
+	<% else %>
+	<td valign=top><%= image_tag("pdf_no.jpeg", :border => 0)  %></td>
+	<% end %>
+
+	<td valign=top><%= link_to "Редактировать" , :controller => :themes, :action => :edit, :id => t.id %>
+	<small><%= link_to "Удалить" , :controller => :themes, :action => :delete, :id => t.id %></small></td>
+
+	</tr>
+ 	<% end %>
+	<% end -%>
+	</table>
+
+
+</div>
+<br />
+<br />
+<% end %>
+<div class="flickr_pagination">
+<%= will_paginate @paging %>
+</div>
+
+<%# end %>

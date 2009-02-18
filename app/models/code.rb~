@@ -1,0 +1,6 @@
+class Code < ActiveRecord::Base
+	has_many :professions
+	validates_uniqueness_of :code_name
+	validates_presence_of :code_name
+	#is_indexed :fields => ['code_name']
+end

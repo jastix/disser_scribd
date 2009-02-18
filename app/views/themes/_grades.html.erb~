@@ -1,0 +1,5 @@
+<%= collection_select(nil,
+ :grade_id,
+  @grades,
+   :id,
+    :grade_name)%>

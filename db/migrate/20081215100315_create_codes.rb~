@@ -1,0 +1,12 @@
+class CreateCodes < ActiveRecord::Migration
+  def self.up
+    create_table :codes do |t|
+    	t.column :code_name, :string, :null => :false
+	t.column :profession_id, :integer
+    end
+  end
+
+  def self.down
+    drop_table :codes
+  end
+end

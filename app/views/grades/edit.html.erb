@@ -1,0 +1,5 @@
+<% form_for :grade, @grade, :url => {:action => 'update', :id => @grade}  do |f| %>
+<%= f.text_field  :grade_name, {:size => 50}  %></p>
+<%= submit_tag "Сохранить" %>
+<% end %>
+<%= link_to 'Назад', {:action => 'list'} %>

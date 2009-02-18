@@ -1,0 +1,1 @@
+<%= collection_select(nil, :code_id, @codes, :id, :code_name, {:promt => "Выберите шифр"})%>

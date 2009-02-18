@@ -1,0 +1,26 @@
+class CodesController < ApplicationController
+
+		layout 'standart'
+	def new
+		  @code = Code.new#(params[:code])
+
+  end
+
+  def create
+  	@code = Code.new(params[:code])
+  	if @code.save
+  		redirect_to :action => 'list'
+  	else
+  		render :action => :new
+ 	end
+	end
+
+def list
+	@codes = Code.find(:all)
+end
+
+ def delete
+	Code.find(params[:id]).destroy
+	redirect_to :action => :list
+ end
+end

@@ -1,0 +1,43 @@
+module ApplicationHelper
+
+  # Sets the page title and outputs title if container is passed in.
+  # eg. <%= title('Hello World', :h2) %> will return the following:
+  # <h2>Hello World</h2> as well as setting the page title.
+  def title(str, container = nil)
+    @page_title = str
+    content_tag(container, str) if container
+  end
+
+  # Outputs the corresponding flash message if any are set
+  def flash_messages
+    messages = []
+    %w(notice warning error).each do |msg|
+      messages << content_tag(:div, html_escape(flash[msg.to_sym]), :id => "flash-#{msg}") unless flash[msg.to_sym].blank?
+    end
+    messages
+  end
+
+  def link_to_back (description = "Back")
+   referer = request.env["HTTP_REFERER"]
+   return false if !referer
+   getIt = request.env["REQUEST_URI"].split("?")[1]
+   if getIt.nil?
+     getIt = ""
+     else
+       getIt = "?" + getIt if !getIt.match(/\?/)
+   end
+   link_to description, referer + getIt
+end
+
+
+def admin_do?(current_user)
+  if current_user.has_role?("admin") or current_user.has_role?("manager")
+    return true
+  else
+    return false
+  end
+end
+
+
+
+end

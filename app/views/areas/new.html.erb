@@ -1,0 +1,19 @@
+<h2>Области</h2>
+<%= error_messages_for 'area'-%>
+Добавить область :
+<%= form_tag :action => 'create'%>
+<%= text_field  :area, :area_name %>
+
+<p><label for="subarea_name[]">Подобласть</label><br/>
+
+<p>
+<% for subarea in Subarea.find(:all) %>
+	<div>
+	<%= check_box_tag "area[subarea_ids][]", subarea.id, @area.subareas.include?(subarea)%>
+	<%= subarea.subarea_name %>
+	</div>
+<% end %>
+</p>
+<%= submit_tag "Добавить" %>
+
+<%= link_to 'К списку', :action => :list %>

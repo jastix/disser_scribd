@@ -1,0 +1,50 @@
+<h4><%= @theme.theme_name %> </h4>
+
+<p><strong>Автор: </strong>  <%= @theme.fio %><br />
+<strong>Название: </strong> <%= @theme.theme_name %><br />
+<strong>Год: </strong> <%= @theme.year_name %> <br />
+<strong>Организация: </strong> <%= @theme.organization.organization_name %> <br />
+<strong>Шифр: </strong> <%= @theme.profession.code_name %> <br />
+<strong>Специальность: </strong> <%= @theme.profession.profession_name %> <br />
+<% if not @theme.profession.areas.count == 0 %>
+<strong>Области: </strong> <%= @theme.profession.areas.collect {|ar| ar.area_name}.join(",") %><br />
+<strong>Подобласти: </strong> <% @theme.profession.areas.each do |ar| %><%= ar.subareas.collect {|subar| subar.subarea_name}.join(",") %> <% end %><br />
+			<% end %>
+
+<strong>Степень: </strong> <%= @theme.profession.grade.grade_name %> <br />
+<strong>Текст автореферата: </strong> <% if @theme.avtoref_swf.exists? %>
+<%= link_to "Просмотр", {:controller => :themes, :action => :show_avtoref_swf, :id => @theme.id}, :target => "_blank" %><br />
+	<% end %>
+<% if admin_do?(current_user) %>
+<strong>Текст диссертации: </strong>
+	<% if @theme.disser_swf.exists? %>
+	<%= link_to "Просмотр", :controller => :themes, :action => :show_disser_swf, :id => @theme.id %><br />
+	<% end %>
+<strong>Текст автореферата в формате MS Word: </strong>
+	<% if @theme.avtoref_doc.exists? %>
+	<%= link_to "Скачать" , :controller => :themes, :action => :download_avtoref_doc, :id => @theme.id %><br />
+	<% end %>
+<strong>Текст автореферата в формате PDF: </strong>
+	<% if @theme.avtoref_pdf.exists? %>
+	<%= link_to "Скачать" , :controller => :themes, :action => :download_avtoref_pdf, :id => @theme.id %><br />
+	<% end %>
+<strong>Текст диссертации в формате MS Word: </strong>
+	<% if @theme.disser_doc.exists? %>
+<%= link_to "Скачать" , :controller => :themes, :action => :download_disser_doc, :id => @theme.id %>
+	<% end %> <br />
+<strong>Текст диссертации в формате PDF: </strong>
+	<% if @theme.disser_pdf.exists? %>
+<%= link_to "Скачать" , :controller => :themes, :action => :download_disser_pdf, :id => @theme.id %>
+	<% end %> <br />
+<% end %>
+
+<strong>Последнее обновление: </strong> <%= distance_of_time_in_words(@theme.updated_at, Time.now) %>
+</p>
+
+
+
+<hr />
+
+
+<%= link_to 'Назад', {:action => :list}  %>
+<%#= link_to_back "Назад" %>

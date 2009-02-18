@@ -1,0 +1,16 @@
+<% form_for :area, @area, :url => {:action => 'update', :id => @area}  do |f| %>
+<%= f.text_field  :area_name, {:size => 50}  %></p>
+
+<p><label for="subarea_name[]">Подобласти</label><br/>
+
+<p>
+<% for subarea in Subarea.find(:all) %>
+	<div>
+	<%= check_box_tag "profession[subarea_ids][]", subarea.id, @area.subareas.include?(subarea)%>
+	<%= subarea.subarea_name %>
+	</div>
+<% end %>
+</p>
+<%= submit_tag "Сохранить" %>
+<% end %>
+<%= link_to 'Назад', {:action => 'list'} %>

@@ -1,0 +1,5 @@
+<% form_for :organization, @organization, :url => {:action => 'update', :id => @organization}  do |f| %>
+<%= f.text_field  :organization_name, {:size => 50}  %></p>
+<%= submit_tag "Сохранить" %>
+<% end %>
+<%= link_to 'Назад', {:action => 'list'} %>

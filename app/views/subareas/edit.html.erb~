@@ -1,0 +1,7 @@
+<% form_for :subarea, @subarea, :url => {:action => 'update', :id => @subarea}  do |f| %>
+<%= f.text_field  :subarea_name, {:size => 50}  %></p>
+
+
+<%= submit_tag "Сохранить" %>
+<% end %>
+<%= link_to 'Назад', {:action => 'list'} %>

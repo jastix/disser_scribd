@@ -1,0 +1,8 @@
+<h2>Шифры</h2>
+<%= error_messages_for 'code'-%>
+Добавить шифр :
+<%= form_tag :action => 'create'%>
+<%= text_field  :code, :code_name %>
+<%= submit_tag "Добавить" %>
+
+<%= link_to 'К списку', :action => :list %>

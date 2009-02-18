@@ -1,0 +1,20 @@
+<ul id="references">
+	<li><%= link_to "Подобласти", :controller => :subareas, :action => :list %></li>
+	<li><%= link_to "Организации", :controller => :organizations, :action => :list %></li>
+	<li><%= link_to "Степени", :controller => :grades, :action => :list %></li>
+	<li><%= link_to "Специальности", :controller => :professions, :action => :list %></li>
+</ul> <br />
+
+<h2>Области</h2>
+<%= link_to 'Добавить', :action => :new %>
+<%= link_to 'К списку работ', :controller => :themes, :action => :list %><br />
+<% if @areas.blank? %>
+<p> Список областей пуст</p>
+	<% else %>
+<ol id="areas_list">
+<% @areas.each do |c| %>
+<li><%= c.area_name %>
+<small><%= link_to "Редактировать", {:action => 'edit', :id => c.id} %></small>
+<small><%= link_to "Удалить", {:action => 'delete', :id => c.id}, :confirm => "Вы уверены, что хотите удалить запись?" %></small></li>
+<% end %>
+<% end %><br />

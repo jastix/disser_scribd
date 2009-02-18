@@ -1,0 +1,12 @@
+<h2>Шифры</h2>
+<%= link_to 'Добавить', :action => :new %>
+<%= link_to 'К списку работ', :controller => :themes, :action => :list %><br /><br />
+<% if @codes.blank? %>
+<p> Список шифров пуст</p>
+	<% else %>
+<ol id="codes_list">
+<% @codes.each do |c| %>
+<li><%= c.code_name %>
+<small><%= link_to "Удалить", {:action => 'delete', :id => c.id}, :confirm => "Вы уверены, что хотите удалить запись?" %></small></li>
+<% end %>
+<% end %><br />

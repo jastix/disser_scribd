@@ -1,0 +1,2 @@
+<%= link_to_back "Назад" %>
+<pre><%= simple_format(@theme.text_dissertation) %></pre>

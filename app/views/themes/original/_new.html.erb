@@ -1,0 +1,60 @@
+<h1> Новая запись </h1>
+<%= error_messages_for :theme %>
+<%= error_messages_for :organization %>
+<%= error_messages_for :profession %>
+<%= error_messages_for :grade %>
+<%= error_messages_for :code %>
+
+<% form_for :theme, :url => {:action => 'create', :multipart => true} do |form| %>
+
+<p><label for="theme_name">Название работы</label><br/>
+<%= form.text_field :theme_name, :size => 100  %></p>
+
+<p><label for="theme_fio">Автор</label><br/>
+<%= form.text_field :fio, :size => 50 %></p>
+
+<p><label for="theme_year_name">Год</label><br/>
+<%= form.text_field :year_name %></p>
+
+<fieldset>
+<% fields_for :organization, :url => { :action => 'create'} do |of| %>
+
+<p><label for="organization_organization_name">Организация</label><br />
+<%= of.text_field :organization_name, :size => 50 %> </p>
+<% end %>
+
+<% fields_for :code, :url => { :action => 'create'} do |cf|%>
+<p><label for="code_code_name">Шифр</label><br/>
+<%= cf.text_field :code_name %></p>
+<% end %>
+
+<% form_for :profession, :url => { :action => 'create'} do |pf| %>
+<p><label for="profession_profession_name">Специальность</label><br/>
+<%= pf.text_field :profession_name,  :size => 50 %></p>
+<% end %>
+
+<% fields_for :grade, :url => {:action => 'create'} do |gf|%>
+<p><label for="grade_grade_name">Степень</label><br/>
+<%= gf.text_field :grade_name,  :size => 50 %></p>
+<% end %>
+
+<% fields_for :theme, :url => {:action => 'create'} do |form|%>
+<p><label for="theme_text_abstract"><b>Текст автореферата</b></label><br/>
+<%= form.text_area :text_abstract, :size =>"80x30" %>
+
+<p><label for="theme_text_dissertation">Текст диссертации</label><br/>
+<%= form.text_area :text_dissertation, :size =>"80x30" %>
+<% end %>
+
+<% fields_for :theme, @theme,  :html => { :multipart => true} do |form| %>
+ <p><label for="avtoref_file">Файлы автореферата</label><br />
+	Doc <%= form.file_field :avtoref_doc %> <br />
+	Pdf  <%= form.file_field :avtoref_pdf %><br />
+ <p><label for="disser_file">Файлы диссертации</label><br />
+	Doc <%= form.file_field :disser_doc %><br />
+	Pdf  <%= form.file_field :disser_pdf %><br />
+<% end %>
+</fieldset>
+<%= submit_tag "Добавить" %>
+<% end %>
+<%= link_to 'Назад', {:action => 'list'} %>

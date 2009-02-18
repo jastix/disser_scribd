@@ -1,0 +1,37 @@
+<% if @themes and not @themes.empty? %>
+
+<table width=95% border=1 cellpadding=4 cellspacing=0 align=center >
+
+<caption>Список авторефератов и диссертации</caption>
+	 <tr>
+	 <th rowspan=2>№</th><th rowspan=2>Автор</th><th rowspan=2>Тема</th><th rowspan=2>Организация</th><th rowspan=2>Год</th><th rowspan=2>Шифр</th><th rowspan=2>Специальность</th><th rowspan=2>Степень</th><th rowspan=2>Текст автореферата</th><th rowspan=2>Текст диссертации</th><th colspan=2>Скачать текст автореферата</th><th colspan=2>Скачать текст диссертации</th>
+	 </tr>
+	 <tr>
+	 <th>.Doc</th><th>Pdf</th><th>.Doc</th><th>Pdf</th>
+	 </tr>
+
+<% @themes.each do |t| -%>
+<tr class="<%= cycle("even","odd") %>">
+	<td align=center><%= t.id %> </td>
+	<td> <%= link_to t.fio , :controller => :themes, :action => :show, :id => t.id %> </td>
+	<td><%= link_to t.theme_name, :controller => :themes, :action => :show, :id => t.id %></td>
+	<td><%= link_to t.organization.organization_name , :controller => :themes, :action => :show, :id => t.id %></td>
+	<td><%= link_to t.year_name, :controller => :themes, :action => :show, :id => t.id %></td>
+	<td><%= link_to t.profession.code.code_name, :controller => :themes, :action => :show, :id => t.id %></td>
+	<td><%= link_to t.profession.profession_name, :controller => :themes, :action => :show, :id => t.id %></td>
+	<td><%= link_to t.profession.grade.grade_name, :controller => :themes, :action => :show, :id => t.id %></td>
+	<td><%= link_to "Текст автореферата", :controller => :themes, :action => :show_abstract, :id => t.id %></td>
+	<td><%= link_to "Текст диссертации", :controller => :themes, :action => :show_disser, :id => t.id %></td>
+	<td><%= link_to "Скачать" , :controller => :themes, :action => :download_avtoref_doc, :id => t.id %></td>
+	<td><%= link_to "Скачать" , :controller => :themes, :action => :download_avtoref_pdf, :id => t.id %></td>
+	<td><%= link_to "Скачать" , :controller => :themes, :action => :download_disser_doc, :id => t.id %></td>
+	<td><%= link_to "Скачать" , :controller => :themes, :action => :download_disser_pdf, :id => t.id %></td>
+	<td><%= link_to "Редактировать" , :controller => :themes, :action => :edit, :id => t.id %> </td>
+	</tr>
+
+	<% end -%>
+	</table>
+
+
+
+<% end %>
