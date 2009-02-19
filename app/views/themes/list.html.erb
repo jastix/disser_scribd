@@ -6,7 +6,6 @@
 	<li><%= link_to "Подобласти", :controller => :subareas, :action => :list %></li>
 	<li><%= link_to "Специальности", :controller => :professions, :action => :list %></li>
 </ul> <br />
-<p><%= link_to "Добавить", {:action => 'new' }%></p>
 <% end %>
 
   <h3>Поиск</h3>
@@ -22,7 +21,7 @@
   <p>Записей не наидено</p>
 <% else %>
 
-<div id="search_table">
+<div class="search_table">
 <%# if @themes and not @themes.empty? %>
 
 <table width=95% border=1 cellpadding=4 cellspacing=0 align=left >

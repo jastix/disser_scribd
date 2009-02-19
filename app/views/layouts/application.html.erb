@@ -22,7 +22,8 @@
 					<li><%= link_to 'Выход', logout_path %></li>
 					<% if  current_user.has_role?("admin") %>
 					<li><%= link_to 'Регистрация', signup_path %></li>
-
+					<li><%= link_to 'Пользователи', users_path %></li>
+					<li><%= link_to "Добавить работу", {:controller => 'themes', :action => 'new' }%></li>
 						<% end %>
 					<% else %>
 					<li>Электронная библиотека</li><%#= link_to 'Вход', login_path %></li>

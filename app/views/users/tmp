@@ -1,0 +1,4 @@
+<li>
+				<%= f.label :email %>
+				<%= f.text_field :email %>
+			</li>

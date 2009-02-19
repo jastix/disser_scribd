@@ -1,6 +1,18 @@
 class UsersController < ApplicationController
  # skip_before_filter :verify_authenticity_token, :only => :create
+	layout 'application'
   require_role :admin
+
+def list
+	@user = User.find(:all)
+end
+
+
+def delete
+	@user = User.find(params[:id])
+	@user.destroy
+end
+
   def new
     @user = User.new
   end
@@ -38,6 +50,10 @@ class UsersController < ApplicationController
     end
   end
 
+def edit
+	@user = User.find(params[:id])
+end
+
   protected
 
   def create_new_user(attributes)
@@ -59,6 +75,7 @@ class UsersController < ApplicationController
   end
 
   def successful_creation(user)
+	redirect_to :controller => :users, :action => :list
     #redirect_back_or_default(root_path)
     flash[:notice] = "Спасибо за регистрацию!"
     flash[:notice] << " Мы пошлем вам код для активации." if @user.not_using_openid?

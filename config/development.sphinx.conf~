@@ -34,7 +34,7 @@ index theme_core
 {
   source = theme_core_0
   path = /home/jastix/projects/disser_htmlbortFlash/db/sphinx/development/theme_core
-  morphology = stem_en, stem_ru
+  morphology = stem_en
   charset_type = utf-8
 }
 

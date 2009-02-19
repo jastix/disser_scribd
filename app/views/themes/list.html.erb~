@@ -22,7 +22,7 @@
   <p>Записей не наидено</p>
 <% else %>
 
-<div id="search_table">
+<div class="search_table">
 <%# if @themes and not @themes.empty? %>
 
 <table width=95% border=1 cellpadding=4 cellspacing=0 align=left >
@@ -56,14 +56,16 @@
 
 
 	<td valign=top><%= t.profession.grade.grade_name %></td>
-	<% if t.avtoref_swf.exists? %>
-	<td valign=top><%= link_to "Просмотр", {:controller => :themes, :action => :show_avtoref_swf, :id => t.id}, :target => "_blank" %></td>
-	<% end %>
+
+	<td valign=top><% if t.avtoref_swf.exists? %>
+	<%= link_to "Просмотр", {:controller => :themes, :action => :show_avtoref_swf, :id => t.id}, :target => "_blank" %>
+			<% end %></td>
 
 	<% if  admin_do?(current_user) %>
-	<% if t.disser_swf.exists? %>
-	<td valign=top><%= link_to "Просмотр", {:controller => :themes, :action => :show_disser_swf, :id => t.id}, :target => "_blank" %></td>
-	<% end %>
+
+	<td valign=top><% if t.disser_swf.exists? %>
+	<%= link_to "Просмотр", {:controller => :themes, :action => :show_disser_swf, :id => t.id}, :target => "_blank" %>
+			<% end %></td>
 
 	<% if t.avtoref_doc.exists? %>
 	<td valign=top><%= link_to image_tag("doc.jpeg", :border => 0) , :controller => :themes, :action => :download_avtoref_doc, :id => t.id %></td>
