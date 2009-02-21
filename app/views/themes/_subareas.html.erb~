@@ -1,0 +1,1 @@
+<%= collection_select(nil, :subarea_id, @subareas, :id, :subarea_name,  {:multiple=>true})%>

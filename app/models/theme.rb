@@ -64,8 +64,8 @@ before_save :edit_title
 	end
 
 	def create_swf_avtoref
-		if self.avtoref_swf.exists? and not self.avtoref_pdf.url.nil? and not (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
-		else
+		if not self.avtoref_swf.exists? and not self.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png" and not (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
+		then
 		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
 		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.avtoref_pdf.url
 		tmp_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "tmp" + "/" + self.avtoref_pdf.original_filename + ".swf"
@@ -75,6 +75,8 @@ before_save :edit_title
 		self.avtoref_swf = File.new(tmp_path)
 
 		File.delete(tmp_path)
+		else
+
 
 		end
 end
@@ -82,8 +84,8 @@ end
 
 def create_swf_disser
 
-		if self.disser_swf.exists? and not self.disser_pdf.url.nil? and not (self.disser_swf.original_filename[0...-4] == self.disser_pdf.original_filename)
-		else
+		if not self.disser_swf.exists? and self.disser_pdf.url != "/disser_pdfs/original/missing.png"  and not (self.disser_swf.original_filename[0...-4] == self.disser_pdf.original_filename)
+		then
 		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
 		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.disser_pdf.url
 		tmp_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "tmp" + "/" + self.disser_pdf.original_filename + ".swf"
@@ -92,6 +94,8 @@ def create_swf_disser
 		self.disser_swf = File.new(tmp_path)
 
 		File.delete(tmp_path)
+		else
+
 		end
 
 	end

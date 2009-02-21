@@ -20,11 +20,11 @@
 
 <p><label for="profession_profession_name">Специальность</label><br/></p>
 <%= collection_select(:theme, :profession_id, @professions, :id, :profession_name,
-			{:include_blank => true},
+			{:include_blank => true,:multiple => true},
 			{:onchange => "#{remote_function(:url => {:action => "update_grades"},
 			:with => "'profession_id='+value")}"})%>
 
-<p><label for="area_area_name">Область</label><br/>
+<p><label for="area_name">Область</label><br/>
 <div id="areas"><%= render :partial => 'areas', :object => @areas %> </div>
 
 <p><label for="subarea_subarea_name">Подобласть</label><br/>

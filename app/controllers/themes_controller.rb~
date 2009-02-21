@@ -52,7 +52,8 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
 
   	if @theme.save
 		@theme.create_swf_avtoref
-		@theme.create_swf_disser
+
+		@theme.create_swf_disser unless @theme.disser_pdf.url.nil?
 		@theme.update_attributes(params[:theme])
   		redirect_to :action => :list
  	else
@@ -84,8 +85,9 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.find(params[:id])
+	 @theme.create_swf_disser
 	@theme.create_swf_avtoref
-	@theme.create_swf_disser
+
   	if @theme.update_attributes(params[:theme])
   		redirect_to :action => :list
  	else

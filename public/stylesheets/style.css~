@@ -18,33 +18,48 @@ ul#references li {
 
 
 /*стиль списка страниц */
-.flickr_pagination {
-  text-align: center;
-  padding: .3em; }
-  .flickr_pagination a, .flickr_pagination span {
-    padding: .2em .5em; }
-  .flickr_pagination span.disabled {
-    color: #AAA; }
-  .flickr_pagination span.current {
-    font-weight: bold;
-    color: #FF0084; }
-  .flickr_pagination a {
-    border: 1px solid #DDDDDD;
-    color: #0063DC;
-    text-decoration: none; }
-    .flickr_pagination a:hover, .flickr_pagination a:focus {
-      border-color: #003366;
-      background: #0063DC;
-      color: white; }
-  .flickr_pagination .page_info {
-    color: #aaa;
-    padding-top: .8em; }
-  .flickr_pagination .prev_page, .flickr_pagination .next_page {
-    border-width: 2px; }
-  .flickr_pagination .prev_page {
-    margin-right: 1em; }
-  .flickr_pagination .next_page {
-    margin-left: 1em; }
+ul{border:0; margin:0; padding:0;}
+
+.pagination li{
+border:0; margin:0; padding:0;
+font-size:11px;
+list-style:none;
+}
+.pagination a{
+border:solid 1px #DDDDDD;
+margin-right:2px;
+}
+.pagination .previous-off,
+.pagination .next-off {
+color:#666666;
+display:block;
+float:left;
+font-weight:bold;
+padding:3px 4px;
+}
+.pagination .next a,
+.pagination .previous a {
+font-weight:bold;
+border:solid 1px #FFFFFF;
+}
+.pagination .active{
+color:#ff0084;
+font-weight:bold;
+display:block;
+float:left;
+padding:4px 6px;
+}
+.pagination a:link,
+.pagination a:visited {
+color:#0063e3;
+display:block;
+float:left;
+padding:3px 6px;
+text-decoration:none;
+}
+.pagination a:hover{
+border:solid 1px #666666;
+}
 
 
 /*Линии меню*/
@@ -143,7 +158,7 @@ ul#references li {
 	color: #797268;
 }
 
-/*
+/* таблица с работами
 
 =====================================
 
@@ -261,7 +276,7 @@ margin:0;
 
 	background: #dfedf3;
 
-	font-size: 13px;
+	font-size: 14px;
 
 }
 
@@ -291,7 +306,7 @@ margin:0;
 
 	font-family: "Trebuchet MS", Trebuchet, Arial, sans-serif;
 
-	font-size: 12px;
+	font-size: 14px;
 
 	padding: 6px;
 

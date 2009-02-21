@@ -1,3 +1,3 @@
-<%= collection_select(nil, :area_id, @areas, :id, :area_name, {:include_blank => true},
+<%= collection_select(nil, :area_id, @areas, :id, :area_name, {:include_blank => true, :multiple=> true},
 			{:onchange => "#{remote_function(:url => {:action => "update_areas"},
-			:with => "'area_id='+value")}"})%>)%>
+			:with => "'area_id='+value")}"})%>
