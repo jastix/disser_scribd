@@ -7,9 +7,11 @@ class CreateSubareas < ActiveRecord::Migration
 	t.column :area_id, :integer
 	t.column :subarea_id, :integer
     end
-  
+  end
+end
 
   def self.down
     drop_table :subareas
+    drop_table :areas_subareas
   end
 end

@@ -24,10 +24,10 @@
 			{:onchange => "#{remote_function(:url => {:action => "update_grades"},
 			:with => "'profession_id='+value")}"})%>
 
-<p><label for="area_name">Область</label><br/>
+<p><label for="area_name[]">Область</label><br/>
 <div id="areas"><%= render :partial => 'areas', :object => @areas %> </div>
 
-<p><label for="subarea_subarea_name">Подобласть</label><br/>
+<p><label for="subarea_name[]">Подобласть</label><br/>
 <div id="subareas"><%= render :partial => 'subareas', :object => @subareas %></div>
 
 <p><label for="grade_grade_name">Степень</label><br/></p>

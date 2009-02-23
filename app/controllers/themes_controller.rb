@@ -49,7 +49,8 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.new(params[:theme])
-
+	params[:theme][:rea_ids] ||= []
+	params[:theme][:subarea_ids] ||= []
   	if @theme.save
 		@theme.create_swf_avtoref
 
@@ -85,11 +86,13 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.find(params[:id])
-
-	@theme.create_swf_avtoref
-	@theme.create_swf_disser
+	params[:theme][:area_ids] ||= []
+	params[:theme][:subarea_ids] ||= []
 
   	if @theme.update_attributes(params[:theme])
+		@theme.create_swf_avtoref
+		@theme.create_swf_disser
+		@theme.update_attributes(params[:theme])
   		redirect_to :action => :list
  	else
  		render :action => :edit , :id => @theme
@@ -143,7 +146,7 @@ end
 		profession = Profession.find(params[:profession_id])
 
 		@grades = eval("[profession.grade]")
-		@areas = profession.areas
+		@areas = Area.find(:all)
 
 		render :update do |page|
 			page.replace_html 'areas', :partial => 'areas', :object => @areas

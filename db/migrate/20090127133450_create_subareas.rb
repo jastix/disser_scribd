@@ -12,5 +12,6 @@ end
 
   def self.down
     drop_table :subareas
+    drop_table :areas_subareas
   end
 end

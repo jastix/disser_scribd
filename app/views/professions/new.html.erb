@@ -5,17 +5,6 @@
 <%= text_field  :profession, :profession_name, :size => 80 %><br />
 Добавить шифр : <br />
 <%= text_field  :profession, :code_name, :size => 80 %>
-<p><label for="area_name[]">Область</label><br/>
-
-<p>
-<% for area in Area.find(:all) %>
-	<div>
-	<%= check_box_tag "profession[area_ids][]", area.id, @profession.areas.include?(area)%>
-	<%= area.area_name %>
-	</div>
-<% end %>
-</p>
-
 
 <p><label for="grade_grade_name">Степень</label><br/>
 <%= collection_select(:profession, :grade_id, @grades, :id, :grade_name)%>

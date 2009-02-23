@@ -4,5 +4,6 @@ class Area < ActiveRecord::Base
 	#has_many :professions , :through => :professions_areas
 has_and_belongs_to_many :professions
 has_and_belongs_to_many :subareas
-#attr_accessible :area_ids
+has_and_belongs_to_many :themes
+attr_accessible :area_ids
 end

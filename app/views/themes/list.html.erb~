@@ -103,7 +103,7 @@
 <br />
 <br />
 <% end %>
-<div class="digg_pagination">
+<div class="pagination">
 <%= will_paginate @paging %>
 </div>
 

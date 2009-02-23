@@ -2,13 +2,15 @@ class Theme < ActiveRecord::Base
 
 	belongs_to :profession
 	belongs_to :organization
+	has_and_belongs_to_many :areas
+	has_and_belongs_to_many :subareas
 	validates_uniqueness_of :theme_name
 	validates_presence_of :theme_name
 	validates_presence_of :fio
 	validates_presence_of :year_name
 	validates_presence_of :organization_id
 	validates_presence_of :profession_id
-	attr_accessible :fio, :theme_name, :text_abstract, :text_dissertation, :year_name, :organization_id, :profession_id, :avtoref_doc, :avtoref_pdf, :disser_doc, :disser_pdf, :avtoref_swf
+	attr_accessible :fio, :theme_name, :text_abstract, :text_dissertation, :year_name, :organization_id, :profession_id, :avtoref_doc, :avtoref_pdf, :disser_doc, :disser_pdf, :avtoref_swf, :area_ids, :subarea_ids
 
 before_save :edit_title
 #after_save :create_swf_avtoref, :create_swf_disser
@@ -45,7 +47,10 @@ before_save :edit_title
 	validates_attachment_content_type :disser_pdf, :content_type => 'application/pdf'
 	validates_attachment_content_type :avtoref_swf, :content_type => 'application/x-swf'
 	validates_attachment_content_type :disser_swf, :content_type => 'application/x-swf'
-#private
+
+
+
+
 
 	def edit_title
 		#удаление кавычек в начале и конце строки и в начале строки
@@ -64,7 +69,7 @@ before_save :edit_title
 	end
 
 	def create_swf_avtoref
-		if not self.avtoref_swf.exists? and not self.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png" and not (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
+		unless self.avtoref_swf.exists? and self.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png" and not (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
 		then
 		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
 		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.avtoref_pdf.url
@@ -82,7 +87,7 @@ before_save :edit_title
 end
 
 
-def create_swf_disser
+	def create_swf_disser
 
 		if not self.disser_swf.exists? and self.disser_pdf.url != "/disser_pdfs/original/missing.png"  and not (self.disser_swf.original_filename[0...-4] == self.disser_pdf.original_filename)
 		then

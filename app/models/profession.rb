@@ -8,7 +8,7 @@ class Profession < ActiveRecord::Base
 	validates_uniqueness_of :profession_name
 	validates_presence_of :profession_name
 
-	before_validation :edit_name
+	#before_validation :edit_name
 private
 	def edit_name
 		self.profession_name = profession_name + " " + "(" + self.areas.collect{|ar| ar.area_name}.join(",") + ")"

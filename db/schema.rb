@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090203153012) do
+ActiveRecord::Schema.define(:version => 20090223162651) do
 
   create_table "areas", :force => true do |t|
     t.string "area_name"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(:version => 20090203153012) do
   create_table "areas_subareas", :id => false, :force => true do |t|
     t.integer "area_id"
     t.integer "subarea_id"
+  end
+
+  create_table "areas_themes", :id => false, :force => true do |t|
+    t.integer "area_id"
+    t.integer "theme_id"
   end
 
   create_table "grades", :force => true do |t|
@@ -83,6 +88,11 @@ ActiveRecord::Schema.define(:version => 20090203153012) do
 
   create_table "subareas", :force => true do |t|
     t.string "subarea_name", :null => false
+  end
+
+  create_table "subareas_themes", :id => false, :force => true do |t|
+    t.integer "subarea_id"
+    t.integer "theme_id"
   end
 
   create_table "themes", :force => true do |t|
