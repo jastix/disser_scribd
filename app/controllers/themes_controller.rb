@@ -43,20 +43,21 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
 
 
   def create
+	params[:theme][:area_ids] ||= []
+	params[:theme][:subarea_ids] ||= []
   	@areas = Area.find(:all)
   	@grades = Grade.find(:all)
 	@subareas = ""
   	@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.new(params[:theme])
-	params[:theme][:rea_ids] ||= []
-	params[:theme][:subarea_ids] ||= []
+
   	if @theme.save
 		@theme.create_swf_avtoref
-
 		@theme.create_swf_disser unless @theme.disser_pdf.url.nil?
-		@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
-@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
+		@theme.update_attributes(params[:theme])
+		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
+		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
  	else
  		render :action => :new
@@ -80,22 +81,21 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   end
 
   def update
-  	params[:theme][:area_ids] ||= []
-	@areas = Area.find(:all)
+	params[:theme][:area_ids] ||= []
+	params[:theme][:subarea_ids] ||= []
+  	@areas = Area.find(:all)
 	@subareas = Subarea.find(:all)
   	@grades = Grade.find(:all)
   	@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.find(params[:id])
-	params[:theme][:area_ids] ||= []
-	params[:theme][:subarea_ids] ||= []
 
   	if @theme.update_attributes(params[:theme])
 		@theme.create_swf_avtoref
-		@theme.create_swf_disser
-		#@theme.update_attributes(params[:theme])
-		@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
-		@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
+		@theme.create_swf_disser unless @theme.disser_pdf.url.nil?
+		@theme.update_attributes(params[:theme])
+		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
+		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
  	else
  		render :action => :edit , :id => @theme

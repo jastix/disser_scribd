@@ -73,7 +73,7 @@ before_save :edit_title
 		then
 
 		else
-	view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
+		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
 		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.avtoref_pdf.url
 		tmp_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "tmp" + "/" + 		self.avtoref_pdf.original_filename + ".swf"
 		system("pdf2swf -B #{view_path} #{pdf_path} -o #{tmp_path}")
@@ -89,7 +89,7 @@ end
 
 	def create_swf_disser
 
-		if not self.disser_swf.exists? and self.disser_pdf.url != "/disser_pdfs/original/missing.png"  and not (self.disser_swf.original_filename[0...-4] == self.disser_pdf.original_filename)
+		if self.disser_swf.exists? and self.disser_pdf.url != "/disser_pdfs/original/missing.png"  and not (self.disser_swf.original_filename[0...-4] == self.disser_pdf.original_filename)
 		then
 		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
 		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.disser_pdf.url
