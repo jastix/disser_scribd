@@ -69,19 +69,19 @@ before_save :edit_title
 	end
 
 	def create_swf_avtoref
-		unless self.avtoref_swf.exists? and self.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png" and not (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
+		if  self.avtoref_swf.exists? and self.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png" and  (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
 		then
-		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
+
+		else
+	view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
 		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.avtoref_pdf.url
-		tmp_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "tmp" + "/" + self.avtoref_pdf.original_filename + ".swf"
+		tmp_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "tmp" + "/" + 		self.avtoref_pdf.original_filename + ".swf"
 		system("pdf2swf -B #{view_path} #{pdf_path} -o #{tmp_path}")
 
 
 		self.avtoref_swf = File.new(tmp_path)
 
 		File.delete(tmp_path)
-		else
-
 
 		end
 end

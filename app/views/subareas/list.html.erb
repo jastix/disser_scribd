@@ -5,8 +5,8 @@
 	<li><%= link_to "Специальности", :controller => :professions, :action => :list %></li>
 </ul> <br />
 
-<h2>Области</h2>
-<%= link_to 'Добавить', :action => :new %>
+<h2>Подобласти</h2>
+<%= link_to 'Добавить', :controller => 'subareas', :action => :new %>
 <%= link_to 'К списку работ', :controller => :themes, :action => :list %><br />
 <% if @subareas.blank? %>
 <p> Список подобластей пуст</p>

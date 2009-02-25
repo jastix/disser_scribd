@@ -7,7 +7,7 @@ class AreasController < ApplicationController
   end
 
   def create
-	@subareas = Subarea.find(:all)
+	#@subareas = Subarea.find(:all)
   	@area = Area.new(params[:area])
   	if @area.save
   		redirect_to :action => 'list'

@@ -55,7 +55,8 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
 		@theme.create_swf_avtoref
 
 		@theme.create_swf_disser unless @theme.disser_pdf.url.nil?
-		@theme.update_attributes(params[:theme])
+		@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
+@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
  	else
  		render :action => :new
@@ -92,7 +93,9 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	if @theme.update_attributes(params[:theme])
 		@theme.create_swf_avtoref
 		@theme.create_swf_disser
-		@theme.update_attributes(params[:theme])
+		#@theme.update_attributes(params[:theme])
+		@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
+		@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
  	else
  		render :action => :edit , :id => @theme
@@ -155,8 +158,8 @@ end
 	end
 
 	def update_areas
-		area = Area.find(params[:area_id])
-		@subareas = area.subareas
+		#area = Area.find(params[:area_id])
+		@subareas = Subarea.find(:all)#area.subareas
 
 		render :update do |page|
 			page.replace_html 'subareas', :partial => 'subareas', :object => @subareas

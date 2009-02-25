@@ -1,9 +1,8 @@
 <h2>Подобласти</h2>
-<%= error_messages_for 'subarea'-%>
+<%= error_messages_for 'subarea' -%>
 Добавить подобласть :
-<%= form_tag :action => 'create'%>
+<%= form_tag :action => 'create' %>
 <%= text_field  :subarea, :subarea_name %>
-
 <%= submit_tag "Добавить" %>
 
 <%= link_to 'К списку', :action => :list %>

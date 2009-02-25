@@ -5,5 +5,7 @@ class Area < ActiveRecord::Base
 has_and_belongs_to_many :professions
 has_and_belongs_to_many :subareas
 has_and_belongs_to_many :themes
-attr_accessible :area_ids
+validates_uniqueness_of :area_name
+validates_presence_of :area_name
+attr_accessible :area_ids, :area_name
 end

@@ -6,10 +6,10 @@
 <strong>Организация: </strong> <%= @theme.organization.organization_name %> <br />
 <strong>Шифр: </strong> <%= @theme.profession.code_name %> <br />
 <strong>Специальность: </strong> <%= @theme.profession.profession_name %> <br />
-<% if not @theme.profession.areas.count == 0 %>
-<strong>Области: </strong> <%= @theme.profession.areas.collect {|ar| ar.area_name}.join(",") %><br />
-<strong>Подобласти: </strong> <% @theme.profession.areas.each do |ar| %><%= ar.subareas.collect {|subar| subar.subarea_name}.join(",") %> <% end %><br />
-			<% end %>
+
+<strong>Области: </strong> <%= @theme.areas.collect {|ar| ar.area_name}.join(",") %><br />
+<strong>Подобласти: </strong> <%= @theme.subareas.collect {|subar| subar.subarea_name}.join(",") %> <br />
+<%# end %>
 
 <strong>Степень: </strong> <%= @theme.profession.grade.grade_name %> <br />
 <strong>Текст автореферата: </strong> <% if @theme.avtoref_swf.exists? %>
@@ -46,5 +46,5 @@
 <hr />
 
 
-<%= link_to 'Назад', {:action => :list}  %>
+<%= link_to_back 'Назад'  %>
 <%#= link_to_back "Назад" %>

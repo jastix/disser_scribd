@@ -17,12 +17,12 @@
  	</div>
  <% end -%>
 
-<% if @themes.blank? %>
+<% if @themes.blank? or @themes.empty?%>
   <p>Записей не наидено</p>
 <% else %>
 
 <div class="search_table">
-<%# if @themes and not @themes.empty? %>
+<% if @themes and not @themes.empty? %>
 
 <table width=95% border=1 cellpadding=4 cellspacing=0 align=left >
 
@@ -40,7 +40,7 @@
 	 <% end %>
 	 </tr>
 
-<% @themes.each do |t| -%>
+<% @themes.each do |t| %>
 <tr class="<%= cycle("even","odd") %>">
 	<td valign=top><%= t.id %> </td>
 	<td valign=top><%= t.fio %> </td>
@@ -95,9 +95,11 @@
 
 	</tr>
  	<% end %>
-	<% end -%>
+	<% end %>
 	</table>
-
+<% else %>
+<p>Записей не наидено</p>
+<% end %>
 
 </div>
 <br />
