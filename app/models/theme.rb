@@ -76,7 +76,7 @@ before_save :edit_title
 		#render :controller => :themes, :action => :new
 		else
 		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
-		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + (self.avtoref_pdf.url false)
+		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.avtoref_pdf.url
 		tmp_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "tmp" + "/" + 		self.avtoref_pdf.original_filename + ".swf"
 		system("pdf2swf -B #{view_path} #{pdf_path} -o #{tmp_path}")
 
@@ -92,6 +92,7 @@ end
 
 		if self.disser_swf.exists? and self.disser_pdf.url != "/disser_pdfs/original/missing.png"  and not (self.disser_swf.original_filename[0...-4] == self.disser_pdf.original_filename)
 		then
+		else
 		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
 		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.disser_pdf.url
 		tmp_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "tmp" + "/" + self.disser_pdf.original_filename + ".swf"
@@ -100,7 +101,7 @@ end
 		self.disser_swf = File.new(tmp_path)
 
 		File.delete(tmp_path)
-		else
+		#else
 
 		end
 

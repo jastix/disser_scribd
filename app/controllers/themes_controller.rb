@@ -53,8 +53,8 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@theme = Theme.new(params[:theme])
 
   	if @theme.save
-		@theme.create_swf_avtoref unless @theme.avtoref_pdf.url.nil?
-		@theme.create_swf_disser unless @theme.disser_pdf.url.nil?
+		@theme.create_swf_avtoref unless @theme.avtoref_pdf.url == "/avtoref_pdfs/original/missing.png"
+		@theme.create_swf_disser unless @theme.disser_pdf.url == "/disser_pdfs/original/missing.png"
 		@theme.update_attributes(params[:theme])
 		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
 		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
