@@ -73,13 +73,12 @@ before_save :edit_title
 	def create_swf_avtoref
 		if  self.avtoref_swf.exists? and self.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png" and  (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
 		then
-
+		#render :controller => :themes, :action => :new
 		else
 		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
-		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.avtoref_pdf.url
+		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + (self.avtoref_pdf.url false)
 		tmp_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "tmp" + "/" + 		self.avtoref_pdf.original_filename + ".swf"
 		system("pdf2swf -B #{view_path} #{pdf_path} -o #{tmp_path}")
-
 
 		self.avtoref_swf = File.new(tmp_path)
 
