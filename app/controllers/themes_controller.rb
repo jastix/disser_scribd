@@ -149,10 +149,10 @@ end
 		profession = Profession.find(params[:profession_id])
 
 		@grades = eval("[profession.grade]")
-		@areas = Area.find(:all)
+		#@areas = Area.find(:all)
 
 		render :update do |page|
-			page.replace_html 'areas', :partial => 'areas', :object => @areas
+			#page.replace_html 'areas', :partial => 'areas', :object => @areas
 			page.replace_html 'grades', :partial => 'grades', :object => @grades
 		end
 	end

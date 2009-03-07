@@ -25,6 +25,8 @@ before_save :edit_title
 		indexes text_abstract
 		indexes text_abstract
 		indexes year_name
+		indexes [profession.profession_name, profession.code_name], :as => :profession
+		indexes organization.organization_name, :as => :organization
 		set_property :delta => true
 	end
 
@@ -36,8 +38,8 @@ before_save :edit_title
 	has_attached_file :avtoref_swf
 	has_attached_file :disser_swf
 
-	validates_attachment_presence :avtoref_doc
-	validates_attachment_presence :avtoref_pdf
+	#validates_attachment_presence :avtoref_doc
+	#validates_attachment_presence :avtoref_pdf
 	#validates_attachment_presence :disser_doc
 	#validates_attachment_presence :disser_pdf
 

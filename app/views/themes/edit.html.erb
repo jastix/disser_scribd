@@ -29,10 +29,11 @@
  			:with => "'profession_id='+value"%>
 
 <p><label for="area_name">Область</label><br/>
-<div id="areas"><%= render :partial => 'areas', :object => @areas %></div></p>
+<div id="areas"><%=  collection_select(:theme, :area_ids, Area.find(:all), :id, :area_name, {},
+			{:name => 'theme[area_ids][]', :multiple=> true}) %></div></p>
 
 <p><label for="subarea_subarea_name">Подобласть</label><br/>
-<div id="subareas"><%= render :partial => 'subareas', :object => @subareas %></div>
+<div id="subareas"><%= collection_select(:theme, :subarea_ids, Subarea.find(:all), :id, :subarea_name, {}, {:name => 'theme[subarea_ids][]', :multiple=>true}) %></div>
 
 <p><label for="grade_grade_name">Степень</label><br/>
 <div id="grades"><%= render :partial => 'grades', :object => @grades %></div></p>
