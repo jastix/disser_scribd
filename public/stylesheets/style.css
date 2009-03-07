@@ -322,7 +322,7 @@ margin:0;
 
 .search_table tbody tr th:hover {
 
-	background: #ffffff;
+/*background: #ffffff; */
 
 
 
@@ -401,7 +401,4 @@ margin:0;
 .search_table tfoot tr td {
 
 	text-align: right;
-
-
-
 }
