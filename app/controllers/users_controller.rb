@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
  # skip_before_filter :verify_authenticity_token, :only => :create
-	layout 'application'
+	#layout 'application'
   require_role :admin
 
 def list
@@ -18,7 +18,7 @@ end
   end
 
   def create
-    logout_keeping_session!
+    #logout_keeping_session!
     if using_open_id?
       authenticate_with_open_id(params[:openid_url], :return_to => open_id_create_url,
         :required => [:nickname, :email]) do |result, identity_url, registration|
@@ -34,7 +34,7 @@ end
   end
 
   def activate
-    logout_keeping_session!
+    #logout_keeping_session!
     user = User.find_by_activation_code(params[:activation_code]) unless params[:activation_code].blank?
     case
     when (!params[:activation_code].blank?) && user && !user.active?
@@ -54,13 +54,21 @@ def edit
 	@user = User.find(params[:id])
 end
 
-  protected
+def update
+	@user = User.find(params[:id])
+	if @user.update_attributes(params[:user])
+		redirect_to users_path
+	else
+		render :action => :new
+	end
+end
+
+protected
 
   def create_new_user(attributes)
     @user = User.new(attributes)
     if @user && @user.valid?
-      if @user.not_using_openid?
-        @user.register!
+      if @user.register!
         @user.activate!
       else
         @user.register_openid!
@@ -78,8 +86,8 @@ end
 	redirect_to :controller => :users, :action => :list
     #redirect_back_or_default(root_path)
     flash[:notice] = "Спасибо за регистрацию!"
-    flash[:notice] << " Мы пошлем вам код для активации." if @user.not_using_openid?
-    flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
+    flash[:notice] << " Мы пошлем вам код для активации."
+    #flash[:notice] << " You can now login with your OpenID." unless @user.not_using_openid?
   end
 
   def failed_creation(message = 'Произошла ошибка при регистрации')

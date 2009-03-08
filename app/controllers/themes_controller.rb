@@ -12,8 +12,8 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
 	@professions = Profession.find(:all)
 
 	page = params[:page] || 1
-@search = Theme.search params[:q], :match_mode => :extended,
-  	 :field_weights => { :theme_name => 20, :fio => 15 },:page => page,  :per_page => 10
+@search = Theme.search params[:q], :include => :profession, :include => :organization, :match_mode => :extended,
+  	 :field_weights => { :theme_name => 20, :fio => 15, :profession => 10 },:page => page,  :per_page => 10
 
   	@themes = @search
   	@paging = @search
@@ -53,16 +53,17 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@theme = Theme.new(params[:theme])
 
   	if @theme.save
-		@theme.create_swf_avtoref unless @theme.avtoref_pdf.url == "/avtoref_pdfs/original/missing.png"
-		@theme.create_swf_disser unless @theme.disser_pdf.url == "/disser_pdfs/original/missing.png"
+		@theme.create_swf_avtoref
+		@theme.create_swf_disser
+
 		@theme.update_attributes(params[:theme])
 		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
 		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
  	else
  		render :action => :new
-	end
 
+	end
 
 
 
@@ -91,8 +92,12 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@theme = Theme.find(params[:id])
 
   	if @theme.update_attributes(params[:theme])
-		@theme.create_swf_avtoref
-		@theme.create_swf_disser unless @theme.disser_pdf.url.nil?
+		if @theme.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png"
+@theme.create_swf_avtoref
+	end
+		if @theme.disser_pdf.url != "/disser_pdfs/original/missing.png"
+@theme.create_swf_disser
+		end
 		@theme.update_attributes(params[:theme])
 		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
 		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
@@ -100,6 +105,7 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
  	else
  		render :action => :edit , :id => @theme
 	end
+
   end
 
 

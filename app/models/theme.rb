@@ -27,7 +27,10 @@ before_save :edit_title
 		indexes year_name
 		indexes [profession.profession_name, profession.code_name], :as => :profession
 		indexes organization.organization_name, :as => :organization
+		set_property :enable_star => 1
+		set_property :min_prefix_len => 3
 		set_property :delta => true
+
 	end
 
 
@@ -90,8 +93,9 @@ end
 
 	def create_swf_disser
 
-		if self.disser_swf.exists? and self.disser_pdf.url != "/disser_pdfs/original/missing.png"  and not (self.disser_swf.original_filename[0...-4] == self.disser_pdf.original_filename)
+		if self.disser_swf.exists? and self.disser_pdf.url != "/disser_pdfs/original/missing.png"  and (self.disser_swf.original_filename[0...-4] == self.disser_pdf.original_filename)
 		then
+
 		else
 		view_path = "#{RAILS_ROOT}" + "/" + "public" + "/" + "rfxview.swf"
 		pdf_path = "#{RAILS_ROOT}" + "/" + "public" + self.disser_pdf.url

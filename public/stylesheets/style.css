@@ -119,7 +119,7 @@ div.pagination span.disabled {
 	text-transform: uppercase;
 	text-align: left;
 	padding: 6px 6px 6px 12px;
-	background: #CAE8EA url(images/bg_header.jpg) no-repeat;
+	background: #CAE8EA ;
 }
 
 .user_table th.nobg {
