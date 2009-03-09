@@ -74,7 +74,7 @@ before_save :edit_title
 	end
 
 	def create_swf_avtoref
-		if  self.avtoref_swf.exists? and self.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png" and  (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
+		if  self.avtoref_swf.exists? and self.avtoref_pdf.url == "/avtoref_pdfs/original/missing.png" and  (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)
 		then
 		#render :controller => :themes, :action => :new
 		else

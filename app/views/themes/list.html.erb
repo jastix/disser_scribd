@@ -10,7 +10,7 @@
 
   <h3>Поиск</h3>
 
- <% form_tag 'list', :method => :get do -%>
+ <% form_tag 'themes', :method => :get do -%>
  	<div id="search">
 		<%= text_field_tag(:q,params[:q], :size => 30) %>
  		<%= submit_tag "Искать" %>
