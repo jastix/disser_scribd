@@ -6,11 +6,8 @@ class SessionsController < ApplicationController
 
   def create
     logout_keeping_session!
-    if using_open_id?
-      open_id_authentication
-    else
-      password_authentication
-    end
+          password_authentication
+
   end
 
   def destroy

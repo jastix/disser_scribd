@@ -40,7 +40,8 @@ before_save :edit_title
 	has_attached_file :disser_pdf
 	has_attached_file :avtoref_swf
 	has_attached_file :disser_swf
-
+	has_scribdable_attachment :avtoref_pdf
+	has_scribdable_attachment :disser_pdf
 	#validates_attachment_presence :avtoref_doc
 	#validates_attachment_presence :avtoref_pdf
 	#validates_attachment_presence :disser_doc
@@ -52,6 +53,8 @@ before_save :edit_title
 	validates_attachment_content_type :disser_pdf, :content_type => 'application/pdf'
 	validates_attachment_content_type :avtoref_swf, :content_type => 'application/x-swf'
 	validates_attachment_content_type :disser_swf, :content_type => 'application/x-swf'
+	validates_attachment_scribdability :avtoref_pdf
+	validates_attachment_scribdability :disser_pdf
 
 
 

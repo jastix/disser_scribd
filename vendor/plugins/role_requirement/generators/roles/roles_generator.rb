@@ -28,14 +28,16 @@ class RolesGenerator < Rails::Generator::NamedBase
   
   def manifest
     record do |m|
+      # Fixture setup
       modify_or_add_user_fixtures(m)
       add_roles_and_join_table_fixtures(m)
       
+      # Update the user model with the has_role? method
       add_method_to_user_model(m)
       
       add_role_model(m)
       add_dependencies_to_application_rb
-      add_dependencies_to_test_helper_rb
+      rspec? ? add_dependencies_to_spec_helper_rb : add_dependencies_to_test_helper_rb
       add_role_requirement_system(m)
       add_migration(m) unless options[:skip_migration]
     end
@@ -44,6 +46,10 @@ class RolesGenerator < Rails::Generator::NamedBase
   def add_role_model(m)
     # add the Role model
     m.template 'role_model.rb.erb', roles_model_filename
+    if rspec?
+      m.template 'spec/models/role_spec.rb', "spec/models/#{roles_model_name.underscore}_spec.rb" 
+      m.template 'spec/controllers/roles_control_spec.rb', "spec/controllers/#{roles_model_name.underscore.pluralize}_control_spec.rb" 
+    end
   end
   
   def add_method_to_user_model(m)
@@ -64,7 +70,7 @@ class RolesGenerator < Rails::Generator::NamedBase
     if (File.exists?(users_fixture_filename))
       users_fixtures_content = File.read users_fixture_filename
       users_fixtures = YAML.load(users_fixtures_content)
-      
+
       begin
         throw "Can't understand whatever is in #{users_fixture_filename}" unless Hash===users_fixtures
         
@@ -83,11 +89,11 @@ class RolesGenerator < Rails::Generator::NamedBase
         skip_fixtures = true
       end
     else
+      fail_with("Updating user fixtures: Fixtures folder (#{fixtures_directory}) does not exist.") unless File.exist?(fixtures_directory) && File.directory?(fixtures_directory)
       # users.yml doesn't exist.  Generate it from scratch
       @next_user_id = 1
-      
       m.template 'users_admin_fixture_with_roles.yml',
-        File.join('test/fixtures', "#{users_table_name}.yml")
+        File.join(fixtures_directory, "#{users_table_name}.yml")
     end
 
   end
@@ -100,9 +106,9 @@ class RolesGenerator < Rails::Generator::NamedBase
   
   def add_roles_and_join_table_fixtures(m)
     m.template 'roles_users.yml',
-              File.join('test/fixtures', "#{habtm_name}.yml")
+              File.join(fixtures_directory, "#{habtm_name}.yml")
     m.template 'roles.yml',
-              File.join('test/fixtures', "#{roles_table_name}.yml")
+              File.join(fixtures_directory, "#{roles_table_name}.yml")
   end
   
   def render_template(name)
@@ -114,10 +120,38 @@ class RolesGenerator < Rails::Generator::NamedBase
   def roles_foreign_key; roles_table_name.singularize.foreign_key; end
   def roles_model_filename;  "app/models/#{roles_model_name.underscore}.rb"; end;
   def users_foreign_key; users_table_name.singularize.foreign_key; end
-  def users_fixture_filename;   "test/fixtures/#{users_table_name}.yml"; end;
-  protected
-    def banner
-      "Usage: #{$0} roles RoleModelName [TargetUserModelName]"
-    end
+  
+  def users_fixture_filename
+    rspec?? "spec/fixtures/#{users_table_name}.yml" : "test/fixtures/#{users_table_name}.yml" 
+  end
+
+  def fixtures_directory
+    File.dirname(users_fixture_filename)
+  end
+
+protected
+
+  def rspec?
+    options[:rspec]
+  end
+
+  def banner
+    "Usage: #{$0} roles RoleModelName [TargetUserModelName]"
+  end
+
+  def add_options!(opt)
+    opt.separator ''
+    opt.separator 'Options:'
+    opt.on("--rspec",
+      "Force rspec mode (checks for RAILS_ROOT/spec by default)") { |v| options[:rspec] = true }      
+  end
+
+  def fail_with(message)
+    puts '' 
+    puts '  *** Generator Failed'
+    puts "    #{message}"
+    puts '' 
+    exit
+  end
 
 end

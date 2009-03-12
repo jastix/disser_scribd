@@ -83,7 +83,11 @@ div.pagination span.disabled {
 #flashcontent {
   height: 100%;
 }
-
+#embedded_flash {
+  width: 600;
+  height: 800;
+overflow:hidden;
+}
 /* Таблица пользователи */
 .user_table body {
 	font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;

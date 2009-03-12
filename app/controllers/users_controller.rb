@@ -11,6 +11,7 @@ end
 def delete
 	@user = User.find(params[:id])
 	@user.destroy
+	redirect_to users_path
 end
 
   def new
@@ -19,18 +20,9 @@ end
 
   def create
     #logout_keeping_session!
-    if using_open_id?
-      authenticate_with_open_id(params[:openid_url], :return_to => open_id_create_url,
-        :required => [:nickname, :email]) do |result, identity_url, registration|
-        if result.successful?
-          create_new_user(:identity_url => identity_url, :login => registration['nickname'], :email => registration['email'])
-        else
-          failed_creation(result.message || "Извините, не получилось")
-        end
-      end
-    else
+
       create_new_user(params[:user])
-    end
+
   end
 
   def activate

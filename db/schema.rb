@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090223162651) do
+ActiveRecord::Schema.define(:version => 20090312185853) do
 
   create_table "areas", :force => true do |t|
     t.string "area_name"
@@ -96,11 +96,11 @@ ActiveRecord::Schema.define(:version => 20090223162651) do
   end
 
   create_table "themes", :force => true do |t|
-    t.string   "theme_name",                                     :null => false
-    t.string   "fio",                                            :null => false
-    t.string   "year_name",                                      :null => false
-    t.text     "text_abstract",            :limit => 2147483647, :null => false
-    t.text     "text_dissertation",        :limit => 2147483647, :null => false
+    t.string   "theme_name",                                          :null => false
+    t.string   "fio",                                                 :null => false
+    t.string   "year_name",                                           :null => false
+    t.text     "text_abstract",                 :limit => 2147483647, :null => false
+    t.text     "text_dissertation",             :limit => 2147483647, :null => false
     t.integer  "profession_id"
     t.integer  "organization_id"
     t.string   "avtoref_doc_file_name"
@@ -124,6 +124,10 @@ ActiveRecord::Schema.define(:version => 20090223162651) do
     t.string   "disser_swf_file_name"
     t.string   "disser_swf_content_type"
     t.integer  "disser_swf_file_size"
+    t.integer  "avtoref_pdf_scribd_id"
+    t.string   "avtoref_pdf_scribd_access_key"
+    t.integer  "disser_pdf_scribd_id"
+    t.string   "disser_pdf_scribd_access_key"
   end
 
   create_table "users", :force => true do |t|

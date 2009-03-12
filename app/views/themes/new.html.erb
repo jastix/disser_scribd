@@ -19,7 +19,7 @@
 
 
 <p><label for="profession_profession_name">Специальность</label><br/></p>
-<%= collection_select(:theme, :profession_id, @professions, :id, :sort,
+<%= collection_select(:theme, :profession_id, @professions, :id, :profession_name,
 			{:include_blank => true},
 			{:onchange => "#{remote_function(:url => {:action => "update_grades"},
 			:with => "'profession_id='+value")}"})%>

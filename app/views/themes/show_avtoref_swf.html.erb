@@ -1,2 +1,4 @@
-<%= javascript_include_tag "swfobject" %>
-<%= swf_tag(swf_path "#{@theme.avtoref_swf.url}")%>
+<%#= javascript_include_tag "swfobject" %>
+<%#= swf_tag(swf_path "#{@theme.avtoref_swf.url}")%>
+
+<%= display_scribd(@theme, 'avtoref_pdf') %>

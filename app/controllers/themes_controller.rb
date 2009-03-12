@@ -53,14 +53,7 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@theme = Theme.new(params[:theme])
 
   	if @theme.save
-		if @theme.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png"
-			@theme.create_swf_avtoref
-		end
-		if @theme.disser_pdf.url != "/disser_pdfs/original/missing.png"
-			@theme.create_swf_disser
-		end
 
-		@theme.update_attributes(params[:theme])
 		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
 		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
@@ -96,13 +89,7 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@theme = Theme.find(params[:id])
 
   	if @theme.update_attributes(params[:theme])
-		if @theme.avtoref_pdf.url != "/avtoref_pdfs/original/missing.png"
-@theme.create_swf_avtoref
-	end
-		if @theme.disser_pdf.url != "/disser_pdfs/original/missing.png"
-@theme.create_swf_disser
-		end
-		@theme.update_attributes(params[:theme])
+
 		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
 		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
@@ -179,6 +166,7 @@ end
 
 	def show_avtoref_swf
 		@theme = Theme.find(params[:id])
+
 		render :action => :show_avtoref_swf , :layout => false
 	end
 
