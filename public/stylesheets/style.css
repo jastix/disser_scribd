@@ -84,9 +84,7 @@ div.pagination span.disabled {
   height: 100%;
 }
 #embedded_flash {
-  width: 600;
-  height: 800;
-overflow:hidden;
+
 }
 /* Таблица пользователи */
 .user_table body {

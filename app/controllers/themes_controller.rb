@@ -167,12 +167,12 @@ end
 	def show_avtoref_swf
 		@theme = Theme.find(params[:id])
 
-		render :action => :show_avtoref_swf , :layout => false
+		render :action => :show_avtoref_swf# , :layout => false
 	end
 
 	def show_disser_swf
 		@theme = Theme.find(params[:id])
-		render :action => :show_disser_swf , :layout => false
+		render :action => :show_disser_swf# , :layout => false
 	end
 
 

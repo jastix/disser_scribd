@@ -3,7 +3,7 @@ module ScribdFuHelper
   # http://www.scribd.com/publisher/api/api?method_name=Javascript+API
   AVAILABLE_JS_PARAMS = [ :height, :width, :page, :my_user_id, :search_query,
                           :jsapi_version, :disable_related_docs, :mode, :auto_size ]
-  
+
 
   # Displays the scribd object for the attachment on the given +object+. If
   # +alt_text_or_attribute+ is given, then it will be used as the alternate text
@@ -47,7 +47,7 @@ module ScribdFuHelper
 
     <<-END
       <script type="text/javascript" src="http://www.scribd.com/javascripts/view.js"></script>
-      <div id="embedded_flash">#{alt_text}</div>
+      <div id="embedded_flash"> #{alt_text} </div>
       <script type="text/javascript">
         var scribd_doc = scribd.Document.getDoc(#{scribd_id}, '#{scribd_ak}');
         #{param_includes}
