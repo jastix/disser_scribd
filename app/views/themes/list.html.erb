@@ -56,13 +56,13 @@
 
 	<td valign=top><%= t.profession.grade.grade_name %></td>
 
-	<td valign=top><% if t.avtoref_swf.exists? %>
+	<td valign=top><% if t.avtoref_pdf_scribd_id != nil %>
 	<%= link_to "Просмотр", {:controller => :themes, :action => :show_avtoref_swf, :id => t.id}, :target => "_blank" %>
 			<% end %></td>
 
 	<% if  admin_do?(current_user) %>
 
-	<td valign=top><% if t.disser_swf.exists? %>
+	<td valign=top><% if t.disser_pdf_scribd_id != nil %>
 	<%= link_to "Просмотр", {:controller => :themes, :action => :show_disser_swf, :id => t.id}, :target => "_blank" %>
 			<% end %></td>
 

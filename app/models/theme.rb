@@ -13,6 +13,7 @@ class Theme < ActiveRecord::Base
 	attr_accessible :fio, :theme_name, :text_abstract, :text_dissertation, :year_name, :organization_id, :profession_id, :avtoref_doc, :avtoref_pdf, :disser_doc, :disser_pdf, :avtoref_swf, :area_ids, :subarea_ids
 
 before_save :edit_title
+before_validation :attachment_check
 #after_save :create_swf_avtoref, :create_swf_disser
 
 
@@ -53,8 +54,8 @@ before_save :edit_title
 	validates_attachment_content_type :disser_pdf, :content_type => 'application/pdf'
 	validates_attachment_content_type :avtoref_swf, :content_type => 'application/x-swf'
 	validates_attachment_content_type :disser_swf, :content_type => 'application/x-swf'
-	validates_attachment_scribdability :avtoref_pdf
-	validates_attachment_scribdability :disser_pdf
+	validates_attachment_scribdability :avtoref_pdf unless :avtoref_pdf != nil
+	validates_attachment_scribdability :disser_pdf unless :disser_pdf != nil
 
 
 
@@ -75,6 +76,16 @@ before_save :edit_title
 		self.theme_name = theme_name.mb_chars.capitalize
 
 	end
+
+
+def attachment_check
+	if self.avtoref_pdf.exists? and self.avtoref_pdf. == nil
+		then
+	self.avtoref_pdf.url = self.avtoref_pdf.url
+		end
+end
+
+
 
 	def create_swf_avtoref
 		if  self.avtoref_swf.exists? and self.avtoref_pdf.url == "/avtoref_pdfs/original/missing.png" and  (self.avtoref_swf.original_filename[0...-4] == self.avtoref_pdf.original_filename)

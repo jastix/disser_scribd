@@ -12,8 +12,7 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
 	@professions = Profession.find(:all)
 
 	page = params[:page] || 1
-@search = Theme.search params[:q], :include => :profession, :include => :organization, :match_mode => :extended,
-  	 :field_weights => { :theme_name => 20, :fio => 15, :profession => 10 },:page => page,  :per_page => 10
+@search = Theme.search params[:q], :include => :profession, :include => :organization, :match_mode => :extended, :field_weights => { :theme_name => 20, :fio => 15, :profession => 10 },:page => page,  :per_page => 10
 
   	@themes = @search
   	@paging = @search
@@ -21,9 +20,9 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   end
 
   def new
-  	  	@areas = ""
-		@subareas = ""
-  		@grades = ""
+  	  	@areas = ''
+		@subareas = ''
+  		@grades = ''
   		@organizations = Organization.find(:all)
 		@professions = Profession.find(:all)
 		@theme = Theme.new
@@ -88,6 +87,10 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@organizations = Organization.find(:all)
   	@theme = Theme.find(params[:id])
 
+params[:theme].delete(:avtoref_doc) if params[:theme][:avtoref_doc].nil?
+params[:theme].delete(:avtoref_pdf) if params[:theme][:avtoref_pdf].nil?
+params[:theme].delete(:disser_doc) if params[:theme][:disser_doc].nil?
+params[:theme].delete(:disser_pdf) if params[:theme][:disser_pdf].nil?
   	if @theme.update_attributes(params[:theme])
 
 		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
