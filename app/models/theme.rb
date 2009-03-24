@@ -43,10 +43,13 @@ before_validation :attachment_check
 	has_attached_file :disser_swf
 	has_scribdable_attachment :avtoref_pdf
 	has_scribdable_attachment :disser_pdf
+	has_scribdable_attachment :avtoref_doc
+	has_scribdable_attachment :disser_doc
 	#validates_attachment_presence :avtoref_doc
 	#validates_attachment_presence :avtoref_pdf
 	#validates_attachment_presence :disser_doc
-	#validates_attachment_presence :disser_pdf
+	#validates_attachment_presence :disser_pdfhas_scribdable_attachment :avtoref_pdf
+
 
 	validates_attachment_content_type :avtoref_doc, :content_type => 'application/msword'
 	validates_attachment_content_type :avtoref_pdf, :content_type => 'application/pdf'
@@ -54,8 +57,19 @@ before_validation :attachment_check
 	validates_attachment_content_type :disser_pdf, :content_type => 'application/pdf'
 	validates_attachment_content_type :avtoref_swf, :content_type => 'application/x-swf'
 	validates_attachment_content_type :disser_swf, :content_type => 'application/x-swf'
-	validates_attachment_scribdability :avtoref_pdf unless :avtoref_pdf != nil
-	validates_attachment_scribdability :disser_pdf unless :disser_pdf != nil
+	if :avtoref_pdf == nil
+		validates_attachment_scribdability :avtoref_doc
+	elsif :avtoref_doc == nil
+		validates_attachment_scribdability :avtoref_pdf
+	end
+	#validates_attachment_scribdability :avtoref_pdf unless :avtoref_pdf != nil
+
+	if :disser_pdf == nil
+		validates_attachment_scribdability :disser_doc
+	elsif :disser_doc == nil
+		validates_attachment_scribdability :disser_pdf
+	end
+	#validates_attachment_scribdability :disser_pdf unless :disser_pdf != nil
 
 
 

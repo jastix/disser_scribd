@@ -736,12 +736,12 @@ module ActiveRecord #:nodoc:
       # ==== Parameters
       #
       # * +id+ - This should be the id or an array of ids to be updated.
-      # * +attributes+ - This should be a Hash of attributes to be set on the object, or an array of Hashes.
+      # * +attributes+ - This should be a hash of attributes to be set on the object, or an array of hashes.
       #
       # ==== Examples
       #
       #   # Updating one record:
-      #   Person.update(15, { :user_name => 'Samuel', :group => 'expert' })
+      #   Person.update(15, :user_name => 'Samuel', :group => 'expert')
       #
       #   # Updating multiple records:
       #   people = { 1 => { "first_name" => "David" }, 2 => { "first_name" => "Jeremy" } }
@@ -1344,7 +1344,7 @@ module ActiveRecord #:nodoc:
         subclasses.each { |klass| klass.reset_inheritable_attributes; klass.reset_column_information }
       end
 
-      def self_and_descendents_from_active_record#nodoc:
+      def self_and_descendants_from_active_record#nodoc:
         klass = self
         classes = [klass]
         while klass != klass.base_class  
@@ -1364,7 +1364,7 @@ module ActiveRecord #:nodoc:
       # module now.
       # Specify +options+ with additional translating options.
       def human_attribute_name(attribute_key_name, options = {})
-        defaults = self_and_descendents_from_active_record.map do |klass|
+        defaults = self_and_descendants_from_active_record.map do |klass|
           :"#{klass.name.underscore}.#{attribute_key_name}"
         end
         defaults << options[:default] if options[:default]
@@ -1379,7 +1379,7 @@ module ActiveRecord #:nodoc:
       # Default scope of the translation is activerecord.models
       # Specify +options+ with additional translating options.
       def human_name(options = {})
-        defaults = self_and_descendents_from_active_record.map do |klass|
+        defaults = self_and_descendants_from_active_record.map do |klass|
           :"#{klass.name.underscore}"
         end 
         defaults << self.name.humanize

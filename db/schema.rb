@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090312185853) do
+ActiveRecord::Schema.define(:version => 20090323113731) do
 
   create_table "areas", :force => true do |t|
     t.string "area_name"
@@ -128,6 +128,10 @@ ActiveRecord::Schema.define(:version => 20090312185853) do
     t.string   "avtoref_pdf_scribd_access_key"
     t.integer  "disser_pdf_scribd_id"
     t.string   "disser_pdf_scribd_access_key"
+    t.integer  "avtoref_doc_scribd_id"
+    t.string   "avtoref_doc_scribd_access_key"
+    t.integer  "disser_doc_scribd_id"
+    t.string   "disser_doc_scribd_access_key"
   end
 
   create_table "users", :force => true do |t|
