@@ -7,8 +7,9 @@
 <strong>Шифр: </strong> <%= @theme.profession.code_name %> <br />
 <strong>Специальность: </strong> <%= @theme.profession.profession_name %> <br />
 
-<strong>Области: </strong> <%= @theme.areas.collect {|ar| ar.area_name}.join(",") %><br />
-<strong>Подобласти: </strong> <%= @theme.subareas.collect {|subar| subar.subarea_name}.join(",") %> <br />
+<strong>Области: </strong> <%= @theme.areas.map {|ar| ar.area_name}.compact.join(",") %> <br />
+<%#= @theme.areas.collect {|ar| ar.area_name}.join(",") %>
+<strong>Подобласти: </strong> <%= @theme.subareas.map {|subar| subar.subarea_name}.compact.join(",") %> <br />
 <%# end %>
 
 <strong>Степень: </strong> <%= @theme.profession.grade.grade_name %> <br />

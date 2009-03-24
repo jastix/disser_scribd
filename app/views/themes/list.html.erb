@@ -48,10 +48,7 @@
 	<td valign=top><%= t.organization.organization_name %></td>
 	<td valign=top><%= t.year_name %></td>
 	<td valign=top><%= t.profession.code_name %></td>
-	<td valign=top><%= t.profession.profession_name %> <% t.areas.each do |ar|%> (<%= ar.area_name %>) <% end %><% t.subareas.each do |subar| %>
-			(<%= subar.subarea_name %>)
-
-				<% end %></td>
+	<td valign=top><%= t.profession.profession_name %> <% t.areas.each do |ar|%> (<%= ar.area_name %>) <% end %> <% t.subareas.each do |subar| %>(<%= subar.subarea_name %>) <% end %></td>
 
 
 	<td valign=top><%= t.profession.grade.grade_name %></td>
