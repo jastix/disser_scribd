@@ -19,7 +19,7 @@ Rails::Initializer.run do |config|
   # Skip frameworks you're not going to use. To use Rails without a database
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
-
+  config.gem 'yaroslav-russian', :lib => 'russian', :source => 'http://gems.github.com'
   # Specify gems that this application depends on.
   # They can then be installed with "rake gems:install" on new installations.
   # You have to specify the <tt>:lib</tt> option for libraries, where the Gem name (<em>sqlite3-ruby</em>) differs from the file itself (_sqlite3_)
@@ -28,8 +28,11 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   #config.gem "capistrano-ext", :lib => "capistrano"
-  #config.gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com', :version => '2.0.2'
-  #config.gem 'mislav-will_paginate', :version => '2.3.6', :lib => 'will_paginate', :source => 'http://gems.github.com'
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
+  config.gem 'thoughtbot-paperclip', :lib => 'paperclip', :source => 'http://gems.github.com'
+  config.gem 'mdarby-scribd_fu', :lib => 'scribd_fu', :source => 'http://gems.github.com'
+  config.gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
+  config.gem 'mislav-will_paginate',:lib => 'will_paginate', :source => 'http://gems.github.com'
 
   # These cause problems with irb. Left in for reference
   # config.gem 'rspec-rails', :lib => 'spec/rails', :version => '1.1.11'
@@ -76,3 +79,4 @@ Rails::Initializer.run do |config|
   #config.active_record.observers = :user_observer
 
 end
+

@@ -6,3 +6,5 @@ doc/app
 coverage
 db/*.sqlite3
 public/system
+config/scribd.yml
+
