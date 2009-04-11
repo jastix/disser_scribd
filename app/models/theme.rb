@@ -12,9 +12,8 @@ class Theme < ActiveRecord::Base
 	validates_presence_of :profession_id
 	attr_accessible :fio, :theme_name, :text_abstract, :text_dissertation, :year_name, :organization_id, :profession_id, :avtoref_doc, :avtoref_pdf, :disser_doc, :disser_pdf, :avtoref_swf, :area_ids, :subarea_ids
 
-before_save :edit_title
+before_save :edit_title, :edit_name
 before_validation :attachment_check
-#after_save :create_swf_avtoref, :create_swf_disser
 
 
 
@@ -87,11 +86,13 @@ before_validation :attachment_check
       		end
 
 	#первая буква заглавная
-		self.theme_name = theme_name.mb_chars.capitalize
+		self.theme_name = self.theme_name.split(' ').map {|line| line.humanize}.compact.join(" ")
 
 	end
 
-
+	def edit_name
+		self.fio = self.fio.split(' ').map {|line| line.downcase.humanize}.compact.join(" ")
+	end
 def attachment_check
 	if self.avtoref_pdf.exists? and self.avtoref_pdf. == nil
 		then
@@ -139,3 +140,4 @@ end
 
 	end
 end
+

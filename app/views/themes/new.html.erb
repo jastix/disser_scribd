@@ -10,8 +10,7 @@
 <%= f.text_field  :fio, {:size => 50} %></p>
 
 <p><label for="theme_year_name">Год</label><br/>
-<%= f.text_field :year_name %></p>
-
+<%= select(:theme, :year_name, @years )%></p>
 
 <p><label for="organization_organization_name">Организация</label><br />
 <%= collection_select(:theme, :organization_id, @organizations, :id, :organization_name)%></p>
@@ -53,3 +52,4 @@
 <% end %>
 <%# end %>
 <%= link_to 'Назад', {:action => 'list'} %>
+

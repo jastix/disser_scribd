@@ -404,3 +404,25 @@ margin:0;
 
 	text-align: right;
 }
+
+#flash_messages {
+  padding: 8px;
+  margin-bottom: 18px;
+}
+
+
+div#flash-error {
+  background: #fcc;
+  border: 1px solid #f00;
+}
+
+div#flash-notice {
+  background: #66CCFF;
+  border: 1px solid #003399;
+}
+
+div#flash-warning {
+  background: #cbf285;
+  border: 1px solid #3cab09;
+}
+

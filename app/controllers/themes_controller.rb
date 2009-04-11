@@ -1,6 +1,6 @@
 class ThemesController < ApplicationController
 	layout 'application'
-require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstract, :show_avtoref_swf]
+require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstract, :show_avtoref_pdf, :show_avtoref_doc]
 
 
   def list
@@ -23,6 +23,7 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	  	@areas = ''
 		@subareas = ''
   		@grades = ''
+                @years = 1950.to_s..Time.now.strftime('%Y')
   		@organizations = Organization.find(:all)
 		@professions = Profession.find(:all)
 		@theme = Theme.new
@@ -53,8 +54,6 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
 
   	if @theme.save
 
-		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
-		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
  	else
  		render :action => :new
@@ -70,6 +69,7 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@areas = ""
 	@subareas = ""
   	@grades = ""
+        @years = 1950.to_s..Time.now.strftime('%Y')
   	@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.find(params[:id])
@@ -87,14 +87,8 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@organizations = Organization.find(:all)
   	@theme = Theme.find(params[:id])
 
-params[:theme].delete(:avtoref_doc) if params[:theme][:avtoref_doc].nil?
-params[:theme].delete(:avtoref_pdf) if params[:theme][:avtoref_pdf].nil?
-params[:theme].delete(:disser_doc) if params[:theme][:disser_doc].nil?
-params[:theme].delete(:disser_pdf) if params[:theme][:disser_pdf].nil?
   	if @theme.update_attributes(params[:theme])
 
-		#@theme.update_attribute(:avtoref_pdf, params[:theme][:avtoref_pdf])
-		#@theme.update_attribute(:disser_pdf, params[:theme][:disser_pdf])
   		redirect_to :action => :list
  	else
  		render :action => :edit , :id => @theme
@@ -108,41 +102,36 @@ params[:theme].delete(:disser_pdf) if params[:theme][:disser_pdf].nil?
 	redirect_to :controller => :themes, :action => :list
  end
 
- def show_abstract
- 	if current_user.blank? then redirect_to root_path
- 		end
- 	@theme = Theme.find(params[:id])
-end
-
-
- def show_disser
-
- 	@theme = Theme.find(params[:id])
-end
-
-
 def download_avtoref_doc
+	if current_user.blank? then redirect_to root_path
+ 		end
 	@theme = Theme.find(params[:id])
 	# путь к файлу после папки public = @theme.avtoref_doc.url
 	send_file ("#{RAILS_ROOT}" + "/" + "public" + @theme.avtoref_doc.url)
 end
 
 def download_avtoref_pdf
+	if current_user.blank? then redirect_to root_path
+ 		end
 	@theme = Theme.find(params[:id])
 	# путь к файлу после папки public = @theme.avtoref_doc.url
 	send_file ("#{RAILS_ROOT}" + "/" + "public" + @theme.avtoref_pdf.url)
 end
 
 def download_disser_doc
+	if current_user.blank? then redirect_to root_path
+ 		end
 	@theme = Theme.find(params[:id])
 	# путь к файлу после папки public = @theme.avtoref_doc.url
-	send_file ("#{RAILS_ROOT}" + "/" + "public" + @theme.disser_doc.url)
+	send_file ("#{RAILS_ROOT}" + "/" + "public" + @theme.disser_doc.url), :x_sendfile => true
 end
 
 def download_disser_pdf
+	if current_user.blank? then redirect_to root_path
+ 		end
 	@theme = Theme.find(params[:id])
 	# путь к файлу после папки public = @theme.avtoref_doc.url
-	send_file ("#{RAILS_ROOT}" + "/" + "public" + @theme.disser_pdf.url)
+	send_file ("#{RAILS_ROOT}" + "/" + "public" + @theme.disser_pdf.url), :x_sendfile => true
 end
 	def update_grades
 
@@ -168,23 +157,31 @@ end
 	end
 
 	def show_avtoref_pdf
+		if current_user.blank? then redirect_to root_path
+ 		end
 		@theme = Theme.find(params[:id])
 
 		render :action => :show_avtoref_pdf# , :layout => false
 	end
 
 	def show_avtoref_doc
+		if current_user.blank? then redirect_to root_path
+ 		end
 		@theme = Theme.find(params[:id])
 
 		render :action => :show_avtoref_doc# , :layout => false
 	end
 
 	def show_disser_pdf
+		if current_user.blank? then redirect_to root_path
+ 		end
 		@theme = Theme.find(params[:id])
 		render :action => :show_disser_pdf# , :layout => false
 	end
 
 	def show_disser_doc
+		if current_user.blank? then redirect_to root_path
+ 		end
 		@theme = Theme.find(params[:id])
 		render :action => :show_disser_doc# , :layout => false
 	end
