@@ -14,13 +14,18 @@
 
 <strong>Степень: </strong> <%= @theme.profession.grade.grade_name %> <br />
 <strong>Текст автореферата: </strong> <% if @theme.avtoref_pdf_scribd_id != nil %>
-<%= link_to "Просмотр", {:controller => :themes, :action => :show_avtoref_swf, :id => @theme.id}, :target => "_blank" %><br />
-	<% end %>
+	<%= link_to "Просмотр", {:controller => :themes, :action => :show_avtoref_pdf, :id => @theme.id}, :target => "_blank" %>
+		<% elsif @theme.avtoref_doc_scribd_id != nil %>
+	<%= link_to "Просмотр", {:controller => :themes, :action => :show_avtoref_doc, :id => @theme.id}, :target => "_blank" %>
+			<% end %><br />
+
 <% if admin_do?(current_user) %>
 <strong>Текст диссертации: </strong>
 	<% if @theme.disser_pdf_scribd_id != nil %>
-	<%= link_to "Просмотр", :controller => :themes, :action => :show_disser_swf, :id => @theme.id %>
-	<% end %><br />
+	<%= link_to "Просмотр", {:controller => :themes, :action => :show_disser_pdf, :id => @theme.id}, :target => "_blank" %>
+		<% elsif @theme.disser_doc_scribd_id != nil%>
+	<%= link_to "Просмотр", {:controller => :themes, :action => :show_disser_doc, :id => @theme.id}, :target => "_blank" %>
+			<% end %><br />
 <strong>Текст автореферата в формате MS Word: </strong>
 	<% if @theme.avtoref_doc.exists? %>
 	<%= link_to "Скачать" , :controller => :themes, :action => :download_avtoref_doc, :id => @theme.id %>
@@ -37,14 +42,10 @@
 	<% if @theme.disser_pdf.exists? %>
 <%= link_to "Скачать" , :controller => :themes, :action => :download_disser_pdf, :id => @theme.id %>
 	<% end %> <br />
-<% end %>
-
 <strong>Последнее обновление: </strong> <%= distance_of_time_in_words(@theme.updated_at, Time.now) %>
+<% end %>
 </p>
-
-
-
 <hr />
 
-
 <%= link_to_back 'Назад'  %>
+

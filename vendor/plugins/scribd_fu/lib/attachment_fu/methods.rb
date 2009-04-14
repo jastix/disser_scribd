@@ -161,3 +161,4 @@ module ScribdFu
     end
   end
 end
+

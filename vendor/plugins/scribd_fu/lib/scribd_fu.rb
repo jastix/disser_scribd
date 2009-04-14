@@ -8,7 +8,7 @@ module ScribdFu
                    'application/msword', 'application/mspowerpoint',
                    'application/vnd.ms-powerpoint', 'application/excel',
                    'application/vnd.ms-excel', 'application/postscript',
-                   'text/plain', 'application/rtf', 'text/rtf',
+                   'text/plain', 'application/rtf',
                    'application/vnd.oasis.opendocument.text',
                    'application/vnd.oasis.opendocument.presentation',
                    'application/vnd.oasis.opendocument.spreadsheet',
@@ -63,7 +63,6 @@ module ScribdFu
 
       begin
         require 'rscribd'
-
       rescue LoadError
         raise RequiredLibraryNotFoundError.new('rscribd could not be loaded')
       end

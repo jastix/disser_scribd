@@ -1,15 +1,16 @@
 class ThemesController < ApplicationController
 	layout 'application'
+
 require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstract, :show_avtoref_pdf, :show_avtoref_doc]
 
 
   def list
   	if current_user.blank? then redirect_to root_path
  		end
-  	@areas = Area.find(:all)
+  	@areas = Area.find(:all, :include => [:professions, :subareas])
   	@grades = Grade.find(:all)
   	@organizations = Organization.find(:all)
-	@professions = Profession.find(:all)
+	#@professions = Profession.find(:all)
 
 	page = params[:page] || 1
 @search = Theme.search params[:q], :include => :profession, :include => :organization, :match_mode => :extended, :field_weights => { :theme_name => 20, :fio => 15, :profession => 10 },:page => page,  :per_page => 10
@@ -33,34 +34,29 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   def show
   	if current_user.blank? then redirect_to root_path
  		end
-  	@areas = Area.find(:all)
+  	@areas = Area.find(:all, :include => [:professions, :subareas])
   	@grades = Grade.find(:all)
-  	@professions = Profession.find(:all)
+  	#@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.find(params[:id])
   end
 
 
-
   def create
 	params[:theme][:area_ids] ||= []
 	params[:theme][:subarea_ids] ||= []
-  	@areas = Area.find(:all)
+  	@areas = Area.find(:all, :include => :professions)
   	@grades = Grade.find(:all)
 	@subareas = ""
-  	@professions = Profession.find(:all)
+  	#@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.new(params[:theme])
 
   	if @theme.save
-
-  		redirect_to :action => :list
+                redirect_to :action => :list
  	else
  		render :action => :new
-
 	end
-
-
 
 	end
 
@@ -73,7 +69,6 @@ require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstrac
   	@professions = Profession.find(:all)
   	@organizations = Organization.find(:all)
   	@theme = Theme.find(params[:id])
-
 
   end
 

@@ -18,7 +18,6 @@ before_validation :attachment_check
 
 
 
-
 	define_index do
 		indexes fio
 		indexes theme_name
