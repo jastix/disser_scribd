@@ -31,7 +31,7 @@ Rails::Initializer.run do |config|
   config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
   config.gem 'thoughtbot-paperclip', :lib => 'paperclip', :source => 'http://gems.github.com'
   config.gem 'mdarby-scribd_fu', :lib => 'scribd_fu', :source => 'http://gems.github.com'
-  config.gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
+  #config.gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
   config.gem 'mislav-will_paginate',:lib => 'will_paginate', :source => 'http://gems.github.com'
 
   # These cause problems with irb. Left in for reference

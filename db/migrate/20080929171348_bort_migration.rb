@@ -1,4 +1,5 @@
 class BortMigration < ActiveRecord::Migration
+class User < ActiveRecord::Base
   def self.up
     # Create Sessions Table
     create_table :sessions do |t|
@@ -92,3 +93,5 @@ class BortMigration < ActiveRecord::Migration
     drop_table :open_id_authentication_nonces
   end
 end
+end
+
