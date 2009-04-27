@@ -39,14 +39,8 @@ before_validation :attachment_check
 	has_attached_file :disser_pdf
 	has_attached_file :avtoref_swf
 	has_attached_file :disser_swf
-	has_scribdable_attachment :avtoref_pdf
-	has_scribdable_attachment :disser_pdf
-	has_scribdable_attachment :avtoref_doc
-	has_scribdable_attachment :disser_doc
-	#validates_attachment_presence :avtoref_doc
-	#validates_attachment_presence :avtoref_pdf
-	#validates_attachment_presence :disser_doc
-	#validates_attachment_presence :disser_pdfhas_scribdable_attachment :avtoref_pdf
+
+
 
 
 	validates_attachment_content_type :avtoref_doc, :content_type => 'application/msword'
@@ -55,6 +49,11 @@ before_validation :attachment_check
 	validates_attachment_content_type :disser_pdf, :content_type => 'application/pdf'
 	validates_attachment_content_type :avtoref_swf, :content_type => 'application/x-swf'
 	validates_attachment_content_type :disser_swf, :content_type => 'application/x-swf'
+
+        has_scribdable_attachment :avtoref_pdf
+	has_scribdable_attachment :disser_pdf
+	has_scribdable_attachment :avtoref_doc
+	has_scribdable_attachment :disser_doc
 	if :avtoref_pdf == nil
 		validates_attachment_scribdability :avtoref_doc
 	elsif :avtoref_doc == nil
@@ -85,15 +84,15 @@ before_validation :attachment_check
       		end
 
 	#первая буква заглавная
-		self.theme_name = self.theme_name.split(' ').map {|line| line.humanize}.compact.join(" ")
+		self.theme_name = self.theme_name.split(' ').map {|line| line.humanize}.compact.join(" ").humanize
 
 	end
 
 	def edit_name
-		self.fio = self.fio.split(' ').map {|line| line.downcase.humanize}.compact.join(" ")
+		self.fio = self.fio.split(' ').map {|line| line.downcase.humanize}.compact.join(" ").humanize
 	end
 def attachment_check
-	if self.avtoref_pdf.exists? and self.avtoref_pdf. == nil
+	if self.avtoref_pdf.exists? and self.avtoref_pdf == nil
 		then
 	self.avtoref_pdf.url = self.avtoref_pdf.url
 		end

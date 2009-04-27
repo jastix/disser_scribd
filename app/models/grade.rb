@@ -4,3 +4,4 @@ class Grade < ActiveRecord::Base
 	validates_presence_of :grade_name
 
 end
+

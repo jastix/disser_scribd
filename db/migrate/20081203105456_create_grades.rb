@@ -10,3 +10,4 @@ class CreateGrades < ActiveRecord::Migration
     drop_table :grades
   end
 end
+

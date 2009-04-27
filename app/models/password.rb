@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'digest/sha1'
 
 class Password < ActiveRecord::Base
@@ -17,3 +18,4 @@ class Password < ActiveRecord::Base
     self.expiration_date = 2.weeks.from_now
   end
 end
+

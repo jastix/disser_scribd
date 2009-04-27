@@ -4,7 +4,7 @@ module AASM
   module SupportingClasses
     class Event
       attr_reader :name, :success
-      
+
       def initialize(name, options = {}, &block)
         @name = name
         @success = options[:success]
@@ -31,7 +31,7 @@ module AASM
       def transitions_from_state?(state)
         @transitions.any? { |t| t.from == state }
       end
-      
+
       def execute_success_callback(obj)
         case success
         when String, Symbol
@@ -52,3 +52,4 @@ module AASM
     end
   end
 end
+

@@ -1,5 +1,5 @@
 class BortMigration < ActiveRecord::Migration
-class User < ActiveRecord::Base
+
   def self.up
     # Create Sessions Table
     create_table :sessions do |t|
@@ -12,17 +12,17 @@ class User < ActiveRecord::Base
     add_index :sessions, :updated_at
 
     # Create OpenID Tables
-    create_table :open_id_authentication_associations, :force => true do |t|
-      t.integer :issued, :lifetime
-      t.string :handle, :assoc_type
-      t.binary :server_url, :secret
-    end
+    #create_table :open_id_authentication_associations, :force => true do |t|
+    #  t.integer :issued, :lifetime
+    #  t.string :handle, :assoc_type
+    #  t.binary :server_url, :secret
+    #end
 
-    create_table :open_id_authentication_nonces, :force => true do |t|
-      t.integer :timestamp, :null => false
-      t.string :server_url, :null => true
-      t.string :salt, :null => false
-    end
+    #create_table :open_id_authentication_nonces, :force => true do |t|
+    #  t.integer :timestamp, :null => false
+    #  t.string :server_url, :null => true
+    #  t.string :salt, :null => false
+    #end
 
     # Create Users Table
     create_table :users do |t|
@@ -67,9 +67,9 @@ class User < ActiveRecord::Base
     manager_role = Role.create(:name => 'manager')
 
     # Create default admin user
-    user = User.create do |u|
+ user = User.create do |u|
       u.login = 'admin'
-      u.password = u.password_confirmation = 'jx123'
+      u.password = u.password_confirmation = 'jx1234'
       u.email = APP_CONFIG[:admin_email]
     end
 
@@ -92,6 +92,6 @@ class User < ActiveRecord::Base
     drop_table :open_id_authentication_associations
     drop_table :open_id_authentication_nonces
   end
-end
+
 end
 

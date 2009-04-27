@@ -20,9 +20,10 @@
 	<body>
 		<div class="container">
 			<div class="header">
-				<ul>
-					<% if logged_in? %>
-					<li><%= link_to 'Выход', logout_path %></li>
+                        <div id="navcontainer">
+				<ul id="navlist">
+                                <% if logged_in? %>
+                                        <li><%= link_to 'Выход', logout_path %></li>
 					<% if  current_user.has_role?("admin") %>
 					<li><%= link_to 'Регистрация', signup_path %></li>
 					<li><%= link_to 'Пользователи', users_path %></li>
@@ -34,6 +35,7 @@
 					<% end %>
 				</ul>
 			</div>
+                        </div>
 			<div id="content">
                                  <div id="flash_messages">
                                 <%= flash_messages %>

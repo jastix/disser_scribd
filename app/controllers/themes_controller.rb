@@ -2,7 +2,7 @@ class ThemesController < ApplicationController
 	layout 'application'
 
 require_role [:admin, :manager], :for_all_except => [:list, :show, :show_abstract, :show_avtoref_pdf, :show_avtoref_doc]
-
+before_filter :login_required
 
   def list
   	if current_user.blank? then redirect_to root_path
