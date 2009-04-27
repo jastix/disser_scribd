@@ -1,8 +1,14 @@
 #navcontainer {
 padding: 0;
+height: 36px;
+width:400px;
+margin:0 auto;
+
 }
 #navcontainer li {
-display: inline;
+display: block;
+float: left;
+text-align: center;
 }
 #navcontainer li a {
 font-family: Arial;
@@ -15,8 +21,9 @@ color: #fff;
 }
 #navcontainer li a:hover {
 background-color: #2586d7;
-margin-top:-2px;
-padding-bottom:12px;
+padding-bottom: 11px;
+border-bottom: 1px groove #eee;
+margin-top: -2px;
 }
 
 
@@ -69,7 +76,7 @@ ul#references li {
 
 
 
-/*стиль списка страниц */
+/*б�б�аИаЛб� б�аПаИб�аКаА б�б�б�аАаНаИб� */
 /*
 Plugin Name: WP-Digg Style Paginator
 Plugin URI: http://www.mis-algoritmos.com/2007/09/09/wp-digg-style-pagination-plugin-v-10/
@@ -114,32 +121,27 @@ div.pagination span.disabled {
 
 
 
-/*Линии меню*/
+/*а�аИаНаИаИ аМаЕаНб�*/
 
 .container .header {
 	width: 99%;
 	text-align: center;
 	word-spacing: 20px;
-	padding: 5px;
 	background-color: #BDD8DA;
 	border: 1px solid #ccc4
 	margin-bottom: 20px;
 }
 
-.container .header li {
-	display: inline;
-	padding-left: 5px;
-}
 
 
-/* Для флеша*/
+/* а�аЛб� б�аЛаЕб�аА*/
 #flashcontent {
   height: 100%;
 }
 #embedded_flash {
 
 }
-/* Таблица пользователи */
+/* аЂаАаБаЛаИб�аА аПаОаЛб�аЗаОаВаАб�аЕаЛаИ */
 .user_table body {
 	font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	color: #4f6b72;
@@ -213,7 +215,7 @@ div.pagination span.disabled {
 	color: #797268;
 }
 
-/* таблица с работами
+/* б�аАаБаЛаИб�аА б� б�аАаБаОб�аАаМаИ
 
 =====================================
 
